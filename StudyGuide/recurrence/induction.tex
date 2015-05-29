@@ -1,0 +1,28 @@
+\subsection{Solving Recurrence Relations with Induction}
+
+\subsubsection{Example}
+\textbf{Prove that the following systems of equations has the solution $T(n) = n \cdot lg(n)$.}
+$$
+T(n) \begin{cases}
+	2T(\frac{n}{2}) + n, & n = 2^k \mbox{ for } k > 1\\
+	2, & n = 2
+\end{cases}
+$$
+\textbf{Basis}
+\begin{eqnarray*}
+T(2) &=& (2) \cdot lg(2)\\
+	&=& 2 \cdot 1\\
+	&=& 2
+\end{eqnarray*}
+\textbf{Inductive Hypothesis}\\
+Assume that $T(n) = n \cdot lg(n)$ holds true for all $n = q$ where $q = 2^k$.\\\\
+\textbf{Inductive Step}
+\begin{eqnarray*}
+	T(2q) &=& 2T(\frac{(2q)}{2}) + (2q) \text{ (Want to prove)}\\
+	&=& 2T(q) + 2q\\
+	&=& 2\left[q \cdot lg(q)\right] + 2q\\
+	&=& 2q\left[lg(q) + 1\right]\\
+	&=& 2q\left[lg(q) + lg(2) \right]\\
+	&=& 2q \cdot lq(2q)\\
+	& & Q.E.D
+\end{eqnarray*}
