@@ -1,0 +1,13 @@
+\subsubsection{Example}
+\textbf{Prove that asymptotic upper bound of $f(n) = 2n+10$ is $g(n) = n^2$}.
+\begin{eqnarray*}
+	0 \leq f(n) &\leq& c \cdot g(n) \text{ for } n \geq n_0\\
+	0 \leq 2n + 10 &\leq& c \cdot n^2 \text{ for } n \geq n_0
+\end{eqnarray*}
+Arbitrarily choose $c$ and $n_0$ values. Simplest is to turn one of the variables into the value $1$ and solve. For this example, we will assign the value 1 to $n_0$.
+\begin{eqnarray*}
+	0 \leq 2n + 10 &\leq& c \cdot n^2 \text{ for } n \geq 1\\
+	2(1) + 10 &\leq& c \cdot (1)^2\\
+	12 &\leq& c
+\end{eqnarray*}
+By picking $n_0 = 1$ and $c = 12$, the inequality of $2n+10 \leq 12n^2$ will hold true for all $n \geq 1$. Since there exists a constant $c$ and $n_0$ that fulfill this inequality, we have proven that $f(n) = 2n+10 = O(n^2)$.

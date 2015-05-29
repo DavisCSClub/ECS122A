@@ -1,0 +1,23 @@
+\subsubsection{Example}
+\textbf{Prove that $f(n) = 2n$ has an upper bound $o(n^2)$.}
+\begin{eqnarray*}
+	0 \leq c \cdot g(n) &\leq& f(n) \text{ for } n \geq n_0\\
+	0 \leq c \cdot 2n &\leq& n^2 \text{ for } n \geq n_0\\
+	2c &\leq& n \text{ for } n \geq n_0\\
+	2c &\leq& n_0
+\end{eqnarray*}
+For Little O to hold true, the inequality needs to hold true for all $c > 0$ and for all $n > n_0$. From simplifying the inequality, we assert that the inequality will hold true as long as the value of $n_0$ is twice the value of $c$. Given that they are both constants, then there exists a constant value of $n_0$ for all positive constant $c$ that fulfill this inequality.\\\\
+Another method to solve this problem is to use the limit definition.
+\begin{eqnarray*}
+	&\lim\limits_{n\to\infty}& \frac{2n}{n^2}\\
+	&\lim\limits_{n\to\infty}& \frac{2}{n} = 0	
+\end{eqnarray*}
+
+\subsubsection{Example}
+\textbf{Prove that $f(n) = 2n^2$ does not have the upper bound $o(n^2)$.}
+\begin{eqnarray*}
+	0 \leq c \cdot g(n) &\leq& f(n) \text{ for } n \geq n_0\\
+	0 \leq c \cdot 2n^2 &\leq& n^2 \text{ for } n \geq n_0\\
+	2c &\leq& 1\text{ for } n \geq n_0
+\end{eqnarray*}
+For a function to have the Little O bound, the inequality must hold true for all positive $c$. However, simplification of the inequality asserts that the inequality will only hold true for all $c < \frac{1}{2}$. Therefore, $f(n) = 2n^2$ does not have the upper bound $o(n^2)$.

@@ -1,0 +1,17 @@
+\subsection{o-Notation (Little O)}
+\textbf{Notation:}
+$$
+f(n) \in o(g(n))
+$$
+\textbf{Formal Definition:}\\
+For a given function $g(n)$, $o(g(n))$ is the set  of functions for which every positive constant $c > 0$, there exists a constant $n_0 > 0$ such that $0 \leq f(n) \leq c \cdot g(n)$ for all $n \geq n_0$.
+$$
+o(g(n)) = \{ f(n) : \exists \text{ } n_0 \text{ s.t. } 0 \leq f(n) \leq c \cdot g(n) \text{ } \forall \text{ } n \geq n_0, c \geq 0 \}
+$$
+\textbf{Informal Definition:}\\
+The function g(n) is an upper bound that is not asymptotically tight. For all positive constant values of $c$, there must exists a constant $n_0$ such that $0 \leq f(n) \leq c \cdot g(n)$ for all $n \geq n_0$. The value of $n_0$ may not depend on n, but may depend on $c$.\\\\
+Another way to perceive Little O notation is that for $f(n) \in o(g(n))$, the function $f$'s asymptotic growth is strictly less than that of the function $g$'s. In this sense, Little O can be seen as a ``stronger" bound in comparison to Big O. By proving that a function is an element of Little O, it also proves that the function is an element of Big O.\\\\
+\textbf{Limit Definition:}
+$$
+\lim\limits_{n\to\infty} \frac{f(n)}{g(n)} = 0
+$$
