@@ -12,3 +12,4 @@
 \contentsline {subsection}{\numberline {2.1}Fibonacci}{8}
 \contentsline {subsection}{\numberline {2.2}Solving Recurrence Relations with Induction}{8}
 \contentsline {subsubsection}{\numberline {2.2.1}Example}{8}
+\contentsline {subsubsection}{\numberline {2.2.2}Example}{9}

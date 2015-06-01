@@ -15,14 +15,43 @@ T(2) &=& (2) \cdot lg(2)\\
 	&=& 2
 \end{eqnarray*}
 \textbf{Inductive Hypothesis}\\
-Assume that $T(n) = n \cdot lg(n)$ holds true for all $n = q$ where $q = 2^k$.\\\\
+Assume that $T(n) = n \cdot lg(n)$ holds true for all $n = 2^k$.\\\\
 \textbf{Inductive Step}
+\begin{align*}
+T(n)	&=	2T(\frac{n}{2}) + n						&& \text{Base equation}\\
+		&= 	2T(\frac{2^{k+1}}{2}) + 2^{k+1}			&& \text{Substitute n with } 2^{k+1}\\
+		&= 	2T(2^{k}) + 2^{k+1}						&& \text{Simplify parameters to function T(...)}\\
+		&=	2(2^k \cdot lg(2^k)) + 2^{k+1}			&& \text{Inductive hypothesis}\\
+		&=	2^{k+1} \left[ lg(2^k) + 1 \right]		&& \text{Distributive property}\\
+		&=  2^{k+1} \left[ lg(2^k) + lg(2) \right]  && \text{Logarithmic identity}\\
+		&= 	2^{k+1} \cdot lg(2^k \cdot 2)			&& \text{Logarithmic identity}\\
+		&=  2^{k+1} \cdot lg(2^{k+1})				&& \text{Exponent property}\\
+		&											&& \text{Q.E.D}
+\end{align*}
+
+\subsubsection{Example}
+\textbf{Prove that the following systems of equations has the solution $T(n) = 2F(n) - 1$ where $F(n) = F(n-1) + F(n-2)$.}
+$$
+T(n) \begin{cases}
+T(n-1) + T(n-2) + 1, & \mbox{if } n \geq 2\\
+0, & \mbox{if } n = \{0,1\}
+\end{cases}
+$$
+\textbf{Basis}
 \begin{eqnarray*}
-	T(2q) &=& 2T(\frac{(2q)}{2}) + (2q) \text{ (Want to prove)}\\
-	&=& 2T(q) + 2q\\
-	&=& 2\left[q \cdot lg(q)\right] + 2q\\
-	&=& 2q\left[lg(q) + 1\right]\\
-	&=& 2q\left[lg(q) + lg(2) \right]\\
-	&=& 2q \cdot lq(2q)\\
-	& & Q.E.D
+	T(0) &=& 1
 \end{eqnarray*}
+\textbf{Inductive Hypothesis}\\
+Assume that $T(n) = F(n) - 1$ is true for all $n = k$.\\
+\textbf{Inductive Step}
+\begin{align*}
+	T(n) 	&= T(n-1) + T(n-2) + 1					&& \text{Base equation}\\
+	T(k+1) 	&= T((k+1) - 1) + T((k+1) - 2) + 1 		&& \text{Substitute n with k+1}\\
+			&= T(k) + T(k-1) + 1					&& \text{Simplify parameters to function T(...)}\\
+			&= (2F(k) - 1) + (2F(k-1) - 1) + 1		&& \text{Inductive hypothesis}\\
+			&= 2F(k) + 2F(k-1) - 1					&& \text{Simplify equation}\\
+			&= 2(F(k) + F(k-1)) - 1					&& \text{Distributive property}\\
+			&= 2(F(k+1)) - 1						&& \text{Definition of function: } F(k+1) = F(k) + F(k-1)\\
+			&= 2F(k+1) - 1							&& \text{Simplify}\\
+			&										&& \text{Q.E.D}
+\end{align*}
