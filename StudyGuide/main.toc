@@ -1,15 +1,20 @@
-\contentsline {section}{\numberline {1}Asymptotic Notation}{2}
-\contentsline {subsection}{\numberline {1.1}O-Notation (Big O)}{2}
-\contentsline {subsubsection}{\numberline {1.1.1}Example}{2}
-\contentsline {subsection}{\numberline {1.2}o-Notation (Little O)}{3}
-\contentsline {subsubsection}{\numberline {1.2.1}Example}{4}
-\contentsline {subsubsection}{\numberline {1.2.2}Example}{4}
-\contentsline {subsection}{\numberline {1.3}$\Omega $-Notation (Big Omega)}{5}
-\contentsline {subsubsection}{\numberline {1.3.1}Example}{5}
-\contentsline {subsection}{\numberline {1.4}$\omega $-Notation (Little Omega)}{6}
-\contentsline {subsection}{\numberline {1.5}$\Theta $-notation}{7}
-\contentsline {section}{\numberline {2}Recurrence Relations}{8}
-\contentsline {subsection}{\numberline {2.1}Fibonacci}{8}
-\contentsline {subsection}{\numberline {2.2}Solving Recurrence Relations with Induction}{8}
-\contentsline {subsubsection}{\numberline {2.2.1}Example}{8}
-\contentsline {subsubsection}{\numberline {2.2.2}Example}{9}
+\contentsline {chapter}{\numberline {1}Asymptotic Notation}{5}
+\contentsline {section}{\numberline {1.1}O-Notation (Big O)}{6}
+\contentsline {subsection}{\numberline {1.1.1}Example}{6}
+\contentsline {section}{\numberline {1.2}o-Notation (Little O)}{7}
+\contentsline {subsection}{\numberline {1.2.1}Example}{7}
+\contentsline {subsection}{\numberline {1.2.2}Example}{8}
+\contentsline {section}{\numberline {1.3}$\Omega $-Notation (Big Omega)}{9}
+\contentsline {section}{\numberline {1.4}$\omega $-Notation (Little Omega)}{10}
+\contentsline {section}{\numberline {1.5}$\Theta $-notation (Big Theta)}{11}
+\contentsline {chapter}{\numberline {2}Recurrence Relations}{13}
+\contentsline {section}{\numberline {2.1}Recurrence Relations}{13}
+\contentsline {subsection}{\numberline {2.1.1}Fibonacci}{13}
+\contentsline {subsection}{\numberline {2.1.2}Solving Recurrence Relations}{13}
+\contentsline {subsection}{\numberline {2.1.3}Substitution Method}{13}
+\contentsline {subsubsection}{Example}{13}
+\contentsline {chapter}{\numberline {A}Test}{15}
+\contentsline {section}{\numberline {A.1}Induction}{15}
+\contentsline {subsection}{\numberline {A.1.1}Steps}{15}
+\contentsline {subsubsection}{Example}{15}
+\contentsline {subsubsection}{Example}{16}

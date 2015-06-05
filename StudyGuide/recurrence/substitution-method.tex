@@ -1,0 +1,32 @@
+\subsection{Substitution Method}
+\begin{enumerate}
+	\item Guess the bounds.
+	\item Apply mathematical induction to prove the bounds. 
+\end{enumerate}
+
+\subsubsection{Example}
+\textbf{Find the asymptotic upper bound for the following function:}
+$$
+T(n) \begin{cases}
+	2T(n-1) + 1, & n \geq 1\\
+	1, & n = 0
+	\end{cases}
+$$
+\textbf{Guess}
+$$T(n) \in O(2^n)$$
+\textbf{Inductive Basis}
+\begin{eqnarray*}
+	T(0) &=& 2^0\\
+	&=& 1
+\end{eqnarray*}
+\textbf{Inductive Hypothesis}\\
+Assume that $T(n) = 2^n$ holds true for all $n = k$.\\\\
+\textbf{Inductive Step}
+\begin{align*}
+T(n)	&=	2T(n-1) + 1						&& \text{Base equation}\\
+		&= 	2T((k+1) - 1) + 1				&& \text{Substitute n with } k+1\\
+		&=	2T(k) + 1						&& \text{Simplify parameters to T(n)}\\
+		&=  2(2^k) + 1						&& \text{Substitute T(n) with inductive hypothesis}\\
+		&=  2^{k+1} + 1						&& \text{Property of exponents}\\
+&											&& \text{Q.E.D}
+\end{align*}

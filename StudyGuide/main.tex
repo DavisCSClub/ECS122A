@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,11pt]{book}
 \usepackage{fullpage}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -38,6 +38,7 @@
 \end{flushright}
 \end{titlepage}
 
+\setcounter{tocdepth}{2}
 \tableofcontents
 \newpage
 
@@ -51,7 +52,10 @@
 %
 \input{recurrence/recurrence.tex}
 
-
+%
+% APPENDIX
+%
+\input{appendix/appendix.tex}
 
 
 \end{document}

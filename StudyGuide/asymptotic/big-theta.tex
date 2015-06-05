@@ -1,16 +1,20 @@
-\subsection{$\Theta$-notation}
-\textbf{Notation:}\\
+\section{$\Theta$-notation (Big Theta)}
+
+\subsection*{Notation}
 $$
 f(n) \in \Theta(g(n))
 $$
-\textbf{Formal Definition:}\\
+
+\subsection*{Formal Definition}
 For a given function $g(n)$, $\Theta(g(n))$ is the set of functions for which there exists positive constants $c_1$, $c_2$, and $n_0$ such that $0 \leq c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$ for all $n \geq n_0$.
 $$
 \Theta(g(n)) = \{ f(n) : \exists \text{ } c_1, c_2, n_0 \text{ s.t. } 0 \leq c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n) \text{ } \forall \text{ } n \geq n_0 \}
 $$
-\textbf{Informal Definition:}\\
-The function g(n) is an asymptotic tight bound for the function f(n) if there exists constants $c_1$, $c_2$, and $n_0$ such that $0 \leq c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$ for $n \geq n_0$.\\\\
-\textbf{Limit Definition:}\\
+
+\subsection*{Informal Definition}
+The function g(n) is an asymptotic tight bound for the function f(n) if there exists constants $c_1$, $c_2$, and $n_0$ such that $0 \leq c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$ for $n \geq n_0$.
+
+\subsection*{Limit Definition}
 $$
 \lim\limits_{n\to\infty} \frac{f(n)}{g(n)} \in \mathbb{R}_{>0}
 $$
