@@ -28,6 +28,11 @@
 \contentsline {chapter}{\numberline {4}Greedy Algorithm}{25}
 \contentsline {section}{\numberline {4.1}Properties}{26}
 \contentsline {section}{\numberline {4.2}Case Study: Activity-Selection}{27}
+\contentsline {subsection}{\numberline {4.2.1}Formal Problem Statement}{27}
+\contentsline {subsection}{\numberline {4.2.2}Informal Problem Statement}{27}
+\contentsline {subsection}{\numberline {4.2.3}Greedy Choice}{27}
+\contentsline {subsection}{\numberline {4.2.4}Steps}{27}
+\contentsline {subsection}{\numberline {4.2.5}Pseudocode}{27}
 \contentsline {section}{\numberline {4.3}Case Study: Huffman Coding}{28}
 \contentsline {section}{\numberline {4.4}Case Study: Minimum Spanning Tree}{29}
 \contentsline {chapter}{\numberline {5}Dynamic Programming}{31}
