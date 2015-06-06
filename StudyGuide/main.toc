@@ -19,8 +19,12 @@
 \contentsline {subsection}{\numberline {2.4.4}Example}{17}
 \contentsline {subsection}{\numberline {2.4.5}Example}{17}
 \contentsline {subsection}{\numberline {2.4.6}Example}{18}
-\contentsline {chapter}{\numberline {3}Divide and Conquer Algorithms}{19}
-\contentsline {chapter}{\numberline {4}Side Topics}{21}
-\contentsline {section}{\numberline {4.1}Induction}{22}
-\contentsline {subsection}{\numberline {4.1.1}Example}{22}
-\contentsline {subsection}{\numberline {4.1.2}Example}{23}
+\contentsline {chapter}{\numberline {3}Divide and Conquer Paradigm}{19}
+\contentsline {section}{\numberline {3.1}Steps}{20}
+\contentsline {section}{\numberline {3.2}Case Study: Fibonacci Sequence}{21}
+\contentsline {section}{\numberline {3.3}Case Study: Merge Sort}{22}
+\contentsline {subsection}{\numberline {3.3.1}Example}{22}
+\contentsline {chapter}{\numberline {4}Side Topics}{23}
+\contentsline {section}{\numberline {4.1}Induction}{24}
+\contentsline {subsection}{\numberline {4.1.1}Example}{24}
+\contentsline {subsection}{\numberline {4.1.2}Example}{25}

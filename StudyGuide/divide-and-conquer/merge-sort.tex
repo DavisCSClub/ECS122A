@@ -1,0 +1,25 @@
+\section{Case Study: Merge Sort}
+
+\subsection*{Steps}
+
+\begin{enumerate}
+	\item \textbf{Divide} the list of n elements into two sublists with $\frac{n}{2}$ elements each.
+	\item \textbf{Conquer} the sublists by sorting the two sublists recursively using merge sort. When the sublists are of size 1, it becomes sorted.
+	\item \textbf{Combine} the elements of the two sublists by mering them in a sorted sequence.
+\end{enumerate}
+
+\subsection*{Recurrence Relation}
+$$
+T(n) = \begin{cases}
+2T\left(\frac{n}{2}\right) + cn, & n \geq 2\\
+c, & n = 1
+\end{cases}
+$$
+
+\subsection*{Complexity}
+$$
+T(n) = \Theta(n \cdot lg(n))
+$$
+
+\subsection{Example}
+\textbf{Show the steps of sorting the following list using merge sort: $\{ 13, 82, 72, 100, 25, 48, 71, 14 \}$}

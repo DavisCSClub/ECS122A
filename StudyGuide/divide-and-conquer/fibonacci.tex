@@ -1,0 +1,146 @@
+\section{Case Study: Fibonacci Sequence}
+
+\subsection*{Theorem}
+
+\subsubsection*{Fibonacci Sequence Starting with 0}
+Sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
+\[
+\begin{bmatrix}
+F_{n}\\
+F_{n-1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 1\\
+1 & 0
+\end{bmatrix}^{n-1}
+\begin{bmatrix}
+F_{0}\\
+F_{1}
+\end{bmatrix}
+\]
+
+\subsubsection*{Fibonacci Sequence Starting with 1}
+Sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
+\[
+\begin{bmatrix}
+F_{n}\\
+F_{n-1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 1\\
+1 & 0
+\end{bmatrix}^{n-1}
+\begin{bmatrix}
+F_{1}\\
+F_{2}
+\end{bmatrix}
+\]
+
+\subsection*{Derivation}
+\begin{eqnarray*}
+\begin{bmatrix}
+	F_n\\
+	F_{n-1}
+\end{bmatrix}	
+&=&
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	F_{n-1}\\
+	F_{n-2}
+\end{bmatrix}\\
+&=&
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	F_{n-2}\\
+	F_{n-3}
+\end{bmatrix}\\
+&=&
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	F_{n-3}\\
+	F_{n-4}
+\end{bmatrix}\\
+&=&
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}^4
+\begin{bmatrix}
+	F_{n-4}\\
+	F_{n-5}
+\end{bmatrix}\\
+&=&
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}^5
+\begin{bmatrix}
+	F_{n-5}\\
+	F_{n-6}
+\end{bmatrix}\\
+&=&
+\begin{bmatrix}
+	1 & 1\\
+	1 & 0
+\end{bmatrix}^{n-1}
+\begin{bmatrix}
+	F_{0}\\
+	F_{1}
+\end{bmatrix}\\
+\end{eqnarray*}
+$$\text{To verify, let's choose } n = 6$$
+\begin{eqnarray*}
+	\begin{bmatrix}
+		F_{6}\\
+		F_{5}
+	\end{bmatrix}
+	&=&
+	\begin{bmatrix}
+		1 & 1\\
+		1 & 0
+	\end{bmatrix}^5
+	\begin{bmatrix}
+		F_{0}\\
+		F_{1}
+	\end{bmatrix}\\
+		&=&
+		\begin{bmatrix}
+			8 & 5\\
+			5 & 3
+		\end{bmatrix}
+		\begin{bmatrix}
+			0\\
+			1
+		\end{bmatrix}\\
+	&=&
+	\begin{bmatrix}
+		5\\
+		3
+	\end{bmatrix}
+\end{eqnarray*}
+$$
+\text{The sixth Fibonacci number (assuming that the sequence starts at 0) is 5.}
+$$

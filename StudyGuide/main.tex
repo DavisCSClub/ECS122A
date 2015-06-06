@@ -3,7 +3,23 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amstext}
+
 \usepackage{url}
+
+\usepackage{tikz-qtree,tikz-qtree-compat}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{shadows}
+\usetikzlibrary{positioning}
+\usetikzlibrary{trees}
+\usetikzlibrary{arrows}
+
+\newlength{\OUmatrixSepWidth}
+\newcommand{\OUsetMatrixSepWidth}[1]{%
+	\settowidth{\OUmatrixSepWidth}{#1}%
+}
+
 
 \title{Algorithm Design and Analysis (ECS 122A)\\Study Guide}
 \author{Davis Computer Science Club\\
