@@ -34,12 +34,17 @@
 \contentsline {subsection}{\numberline {4.2.4}Steps}{27}
 \contentsline {subsection}{\numberline {4.2.5}Pseudocode}{27}
 \contentsline {section}{\numberline {4.3}Case Study: Huffman Coding}{28}
-\contentsline {section}{\numberline {4.4}Case Study: Minimum Spanning Tree}{29}
+\contentsline {subsection}{\numberline {4.3.1}Formal Problem Statement}{28}
+\contentsline {subsection}{\numberline {4.3.2}Informal Problem Statement}{28}
+\contentsline {subsection}{\numberline {4.3.3}Greedy Choice}{28}
+\contentsline {subsection}{\numberline {4.3.4}Steps}{28}
+\contentsline {subsection}{\numberline {4.3.5}Example}{29}
 \contentsline {chapter}{\numberline {5}Dynamic Programming}{31}
-\contentsline {section}{\numberline {5.1}Case Study: Rod Cutting}{32}
-\contentsline {section}{\numberline {5.2}Case Study: Matrix Chain Multiplication}{33}
-\contentsline {section}{\numberline {5.3}Case Study: Longest Common Subsequence}{34}
-\contentsline {section}{\numberline {5.4}Case Study: Knapsack}{35}
+\contentsline {section}{\numberline {5.1}Sequence}{32}
+\contentsline {section}{\numberline {5.2}Case Study: Rod Cutting}{32}
+\contentsline {section}{\numberline {5.3}Case Study: Matrix Chain Multiplication}{33}
+\contentsline {section}{\numberline {5.4}Case Study: Longest Common Subsequence}{34}
+\contentsline {section}{\numberline {5.5}Case Study: Knapsack}{35}
 \contentsline {chapter}{\numberline {6}Graph Theory}{37}
 \contentsline {section}{\numberline {6.1}Case Study: Breadth First Search (BFS)}{38}
 \contentsline {section}{\numberline {6.2}Case Study: Depth-First Search (DFS)}{39}
