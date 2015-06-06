@@ -1,0 +1,140 @@
+\section{Master Theorem}
+Used for divide and conquer recurrences that follow the generic form:
+$$
+T(n) = a \cdot T(\frac{n}{b}) + f(n) \text{ where } a \geq 1, b > 1
+$$
+
+\subsection{Case 1}
+
+\subsubsection*{Condition}
+$$
+f(n) \in O(n^c)
+$$
+$$
+c < log_b(a)
+$$
+
+\subsubsection*{Solution}
+$$
+T(n) = \Theta(n^{log_b(a)})
+$$
+
+\subsection{Case 2}
+
+\subsubsection*{Condition}
+$$
+f(n) \in \Theta(n^c)
+$$
+$$
+c = log_b(a)
+$$
+
+\subsubsection*{Solution}
+$$
+T(n) \in \Theta(n^{log_b(a)} \cdot log_2(n) )
+$$
+
+\subsection{Case 3}
+
+\subsubsection*{Condition}
+$$
+f(n) \in \Omega(n^c)
+$$
+$$
+c > log_b(a)
+$$
+
+\subsubsection*{Regularity Condition}
+This case must also fulfill the regularity condition.
+$$
+a \cdot f(\frac{n}{b}) \leq k \cdot f(n) \text{ where } k < 1
+$$
+
+\subsubsection*{Solution}
+$$
+T(n) = \Theta(f(n))
+$$
+
+\subsubsection*{Remark}
+The idea behind this case is that given the generic form, the function $f(n)$ will grow far quicker than $a \cdot T(\frac{n}{b})$ and will be the primary influence of $T(n)$'s asymptotic behavior.
+
+\pagebreak
+
+\subsection{Example}
+$$
+T(n) = 64T(\frac{n}{4}) + 1000n^2
+$$
+
+\subsubsection*{Given}
+$$f(n) = 1000n^2 \in \Theta(n^2)$$
+$$a = 64$$
+$$b = 4$$
+$$c = 2$$
+
+\subsubsection*{Condition}
+\begin{eqnarray*}
+	c &\text{ ? }& log_b(a)\\
+	2 &\text{ ? }& log_4(64)\\
+	2 &<& 3
+\end{eqnarray*}
+$$\text{Condition satisfied for case 1}$$
+
+\subsection*{Solution}
+$$
+\therefore T(n) = \Theta(n^{log_4(64)}) = \Theta(n^3)
+$$
+
+\subsection{Example}
+$$
+T(n) = 32T(\frac{n}{2}) + 20n^5
+$$
+
+\subsubsection*{Given}
+$$f(n) = 20n^5 \in \Theta(n^5)$$
+$$a = 32$$
+$$b = 2$$
+$$c = 5$$
+
+\subsubsection*{Condition}
+\begin{eqnarray*}
+	c &\text{ ? }& log_b(a)\\
+	5 &\text{ ? }& log_2(32)\\
+	5 &=& 5
+\end{eqnarray*}
+$$\text{Condition satisfied for case 2}$$
+
+\subsection*{Solution}
+$$
+\therefore T(n) = \Theta(n^{log_2(32)} \cdot log_2(n)) = \Theta(n^5 \cdot lg(n))
+$$
+
+\subsection{Example}
+$$
+T(n) = 7T(\frac{n}{7}) + 19n^{11}
+$$
+
+\subsubsection*{Given}
+$$f(n) = 19n^{11} \in \Theta(n^{11})$$
+$$a = 7$$
+$$b = 7$$
+$$c = 11$$
+
+\subsubsection*{Condition}
+\begin{eqnarray*}
+	c &\text{ ? }& log_b(a)\\
+	11 &\text{ ? }& log_7(7)\\
+	5 &>& 1
+\end{eqnarray*}
+$$\text{Condition partially fulfilled for case 3. Must also check regularity condition.}$$
+\begin{eqnarray*}
+	a \cdot f(\frac{n}{b}) &\leq& k \cdot f(n)\\
+	7 \cdot \left[ 19(\frac{n}{7})^{11} \right] &\leq& k \cdot 19n^{11}\\
+	7 \cdot \frac{n^{11}}{7^{11}} &\leq& k \cdot n^{11}\\
+	\frac{1}{7^{10}} \cdot n^{11} &\leq& k \cdot n^{11}
+\end{eqnarray*}
+$$\text{Choosing } k = \frac{1}{7^{10}} < 1 \text{ fulfills the regularity condition.}$$
+
+\subsection*{Solution}
+$$
+\therefore T(n) = \Theta(19n^{11})
+$$
