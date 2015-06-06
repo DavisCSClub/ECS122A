@@ -23,8 +23,9 @@
 \contentsline {section}{\numberline {3.1}Steps}{20}
 \contentsline {section}{\numberline {3.2}Case Study: Fibonacci Sequence}{21}
 \contentsline {section}{\numberline {3.3}Case Study: Merge Sort}{22}
-\contentsline {subsection}{\numberline {3.3.1}Example}{22}
-\contentsline {chapter}{\numberline {4}Side Topics}{23}
-\contentsline {section}{\numberline {4.1}Induction}{24}
-\contentsline {subsection}{\numberline {4.1.1}Example}{24}
-\contentsline {subsection}{\numberline {4.1.2}Example}{25}
+\contentsline {section}{\numberline {3.4}Case Study: Maximum Subarray}{23}
+\contentsline {subsection}{\numberline {3.4.1}Example}{24}
+\contentsline {chapter}{\numberline {4}Side Topics}{27}
+\contentsline {section}{\numberline {4.1}Induction}{28}
+\contentsline {subsection}{\numberline {4.1.1}Example}{28}
+\contentsline {subsection}{\numberline {4.1.2}Example}{29}

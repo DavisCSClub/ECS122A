@@ -96,40 +96,31 @@ F_{2}
 \begin{bmatrix}
 	1 & 1\\
 	1 & 0
-\end{bmatrix}^5
-\begin{bmatrix}
-	F_{n-5}\\
-	F_{n-6}
-\end{bmatrix}\\
-&=&
-\begin{bmatrix}
-	1 & 1\\
-	1 & 0
 \end{bmatrix}^{n-1}
 \begin{bmatrix}
 	F_{0}\\
 	F_{1}
 \end{bmatrix}\\
 \end{eqnarray*}
-$$\text{To verify, let's choose } n = 6$$
+$$\text{To verify, let's choose } n = 5$$
 \begin{eqnarray*}
 	\begin{bmatrix}
-		F_{6}\\
-		F_{5}
+		F_{5}\\
+		F_{4}
 	\end{bmatrix}
 	&=&
 	\begin{bmatrix}
 		1 & 1\\
 		1 & 0
-	\end{bmatrix}^5
+	\end{bmatrix}^4
 	\begin{bmatrix}
 		F_{0}\\
 		F_{1}
 	\end{bmatrix}\\
 		&=&
 		\begin{bmatrix}
-			8 & 5\\
-			5 & 3
+			5 & 3\\
+			3 & 2
 		\end{bmatrix}
 		\begin{bmatrix}
 			0\\
@@ -137,10 +128,16 @@ $$\text{To verify, let's choose } n = 6$$
 		\end{bmatrix}\\
 	&=&
 	\begin{bmatrix}
-		5\\
-		3
+		3\\
+		2
 	\end{bmatrix}
 \end{eqnarray*}
 $$
-\text{The sixth Fibonacci number (assuming that the sequence starts at 0) is 5.}
+\text{The fifth Fibonacci number (assuming that the sequence starts at 0) is 3.}
 $$
+
+\subsection*{Recurrence Relation}
+$$T(n) = T(\frac{n}{2}) + O(1)$$
+
+\subsection*{Complexity}
+$$T(N) \in \Theta(lg(n))$$
