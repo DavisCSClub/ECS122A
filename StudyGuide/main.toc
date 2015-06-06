@@ -21,11 +21,24 @@
 \contentsline {subsection}{\numberline {2.4.6}Example}{18}
 \contentsline {chapter}{\numberline {3}Divide and Conquer Paradigm}{19}
 \contentsline {section}{\numberline {3.1}Steps}{20}
-\contentsline {section}{\numberline {3.2}Case Study: Fibonacci Sequence}{21}
-\contentsline {section}{\numberline {3.3}Case Study: Merge Sort}{22}
-\contentsline {section}{\numberline {3.4}Case Study: Maximum Subarray}{23}
-\contentsline {subsection}{\numberline {3.4.1}Example}{24}
-\contentsline {chapter}{\numberline {4}Side Topics}{27}
-\contentsline {section}{\numberline {4.1}Induction}{28}
-\contentsline {subsection}{\numberline {4.1.1}Example}{28}
-\contentsline {subsection}{\numberline {4.1.2}Example}{29}
+\contentsline {section}{\numberline {3.2}Case Study: Merge Sort}{20}
+\contentsline {section}{\numberline {3.3}Case Study: Fibonacci Sequence}{21}
+\contentsline {section}{\numberline {3.4}Case Study: Maximum Subarray}{22}
+\contentsline {subsection}{\numberline {3.4.1}Example}{23}
+\contentsline {chapter}{\numberline {4}Greedy Algorithm}{25}
+\contentsline {section}{\numberline {4.1}Properties}{26}
+\contentsline {section}{\numberline {4.2}Case Study: Activity-Selection}{27}
+\contentsline {section}{\numberline {4.3}Case Study: Huffman Coding}{28}
+\contentsline {section}{\numberline {4.4}Case Study: Minimum Spanning Tree}{29}
+\contentsline {chapter}{\numberline {5}Dynamic Programming}{31}
+\contentsline {section}{\numberline {5.1}Case Study: Rod Cutting}{32}
+\contentsline {section}{\numberline {5.2}Case Study: Matrix Chain Multiplication}{33}
+\contentsline {section}{\numberline {5.3}Case Study: Longest Common Subsequence}{34}
+\contentsline {section}{\numberline {5.4}Case Study: Knapsack}{35}
+\contentsline {chapter}{\numberline {6}Graph Theory}{37}
+\contentsline {section}{\numberline {6.1}Case Study: Breadth First Search (BFS)}{38}
+\contentsline {section}{\numberline {6.2}Case Study: Depth-First Search (DFS)}{39}
+\contentsline {chapter}{\numberline {7}Side Topics}{41}
+\contentsline {section}{\numberline {7.1}Induction}{42}
+\contentsline {subsection}{\numberline {7.1.1}Example}{42}
+\contentsline {subsection}{\numberline {7.1.2}Example}{43}
