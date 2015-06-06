@@ -19,8 +19,8 @@
 \contentsline {subsection}{\numberline {2.4.4}Example}{17}
 \contentsline {subsection}{\numberline {2.4.5}Example}{17}
 \contentsline {subsection}{\numberline {2.4.6}Example}{18}
-\contentsline {chapter}{\numberline {A}Test}{19}
-\contentsline {section}{\numberline {A.1}Induction}{19}
-\contentsline {subsection}{\numberline {A.1.1}Steps}{19}
-\contentsline {subsubsection}{Example}{19}
-\contentsline {subsubsection}{Example}{20}
+\contentsline {chapter}{\numberline {3}Divide and Conquer Algorithms}{19}
+\contentsline {chapter}{\numberline {4}Side Topics}{21}
+\contentsline {section}{\numberline {4.1}Induction}{22}
+\contentsline {subsection}{\numberline {4.1.1}Example}{22}
+\contentsline {subsection}{\numberline {4.1.2}Example}{23}

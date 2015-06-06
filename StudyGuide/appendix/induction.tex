@@ -1,13 +1,13 @@
 \section{Induction}
 
-\subsection{Steps}
+\subsection*{Steps}
 \begin{enumerate}
 	\item Basis (Base Case)
 	\item Inductive Hypothesis
 	\item Inductive Step
 \end{enumerate}
 
-\subsubsection{Example}
+\subsection{Example}
 \textbf{Prove that the following systems of equations has the solution $T(n) = n \cdot lg(n)$.}
 $$
 T(n) \begin{cases}
@@ -15,15 +15,18 @@ T(n) \begin{cases}
 	2, & n = 2
 \end{cases}
 $$
-\textbf{Basis}
+
+\subsubsection*{Basis}
 \begin{eqnarray*}
 T(2) &=& (2) \cdot lg(2)\\
 	&=& 2 \cdot 1\\
 	&=& 2
 \end{eqnarray*}
-\textbf{Inductive Hypothesis}\\
-Assume that $T(n) = n \cdot lg(n)$ holds true for all $n = 2^k$.\\\\
-\textbf{Inductive Step}
+
+\subsubsection*{Inductive Hypothesis}
+Assume that $T(n) = n \cdot lg(n)$ holds true for all $n = 2^k$.
+
+\subsubsection*{Inductive Step}
 \begin{align*}
 T(n)	&=	2T(\frac{n}{2}) + n						&& \text{Base equation}\\
 		&= 	2T(\frac{2^{k+1}}{2}) + 2^{k+1}			&& \text{Substitute n with } 2^{k+1}\\
@@ -36,7 +39,9 @@ T(n)	&=	2T(\frac{n}{2}) + n						&& \text{Base equation}\\
 		&											&& \text{Q.E.D}
 \end{align*}
 
-\subsubsection{Example}
+\newpage
+
+\subsection{Example}
 \textbf{Prove that the following systems of equations has the solution $T(n) = 2F(n) - 1$ where $F(n) = F(n-1) + F(n-2)$.}
 $$
 T(n) \begin{cases}
@@ -44,13 +49,14 @@ T(n-1) + T(n-2) + 1, & \mbox{if } n \geq 2\\
 0, & \mbox{if } n = \{0,1\}
 \end{cases}
 $$
-\textbf{Basis}
-\begin{eqnarray*}
-	T(0) &=& 1
-\end{eqnarray*}
-\textbf{Inductive Hypothesis}\\
-Assume that $T(n) = F(n) - 1$ is true for all $n = k$.\\
-\textbf{Inductive Step}
+
+\subsubsection*{Basis}
+$T(0) = 1$
+
+\subsubsection*{Inductive Hypothesis}
+Assume that $T(n) = F(n) - 1$ is true for all $n = k$.
+
+\subsubsection*{Inductive Step}
 \begin{align*}
 	T(n) 	&= T(n-1) + T(n-2) + 1					&& \text{Base equation}\\
 	T(k+1) 	&= T((k+1) - 1) + T((k+1) - 2) + 1 		&& \text{Substitute n with k+1}\\
