@@ -44,6 +44,6 @@
 \contentsline {section}{\numberline {6.1}Case Study: Breadth First Search (BFS)}{38}
 \contentsline {section}{\numberline {6.2}Case Study: Depth-First Search (DFS)}{39}
 \contentsline {chapter}{\numberline {7}Side Topics}{41}
-\contentsline {section}{\numberline {7.1}Induction}{42}
+\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{42}
 \contentsline {subsection}{\numberline {7.1.1}Example}{42}
 \contentsline {subsection}{\numberline {7.1.2}Example}{43}
