@@ -1,1 +1,118 @@
-\section{Case Study: Knapsack}
+\section{Case Study: 0-1 Knapsack}
+
+\subsection*{Problem Statement}
+Given a knapsack with maximum capacity $W$ and a set of items $I = \{ i_1, i_2, ... i_n \}$, in which each item carries a weight $wt_i$ and value $v_i$, find the maximum value possible.
+
+\subsection*{General Algorithm Idea}
+The algorithm slowly builds by first setting the number of items in the system to 0 and the weight of the knapsack to 0. It will then increase the number of items by one and then determine the maximum value achievable with weights $w = 1$ to $w = W$ in the knapsack.
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item Create a table $K$ that is $(n+1) \times (W+1)$. Each row of table represents how many items are in the system so computations for $n = 1$ represents only item $i_1$ in the system. Each column in the table represents how much weight the knapsack is capable of holding.
+	\item Set all cells with column index 0 $(j = 0)$ to the value 0.
+	\item Set all cells with the row index 0 $(i = 0)$ to the value 0.
+	\item We assume that for a no items $(n = 0)$ or no weight to our knapsack $(w = 0)$, the optimal and maximum value is $0$.
+	\item Iterate through the cells starting with $n=1$ and $w = 1$. Fill in all weights for a given row before continuing.
+	\item For each cell $K[i,j]$:
+	\begin{enumerate}
+		\item Retrieve the weight of the item $wt_i$.
+		\item If $wt_i > j$ then this item cannot be used. The column index represents the current maximum weight of the knapsack. If the weight of this item is greater than that, then it implies that the item cannot fit in the knapsack. In this case, it means that the maximum value is for that weight $j$, but with $i-1$ items.\\
+		Therefore, $K[i,j] = K[i-1,j]$
+		\item If the weight of the item alone is less than the current knapsack weight, then this item is a potential candidate. In this condition, there are two potential results:
+		\begin{itemize}
+			\item Given that the knapsack weight does not change, the value of the potential item and a subset of items combined is greater than the maximum value for $i-1$ items.\\
+			Therefore, $K[i,j] = max( v_i + K[i-1][w - w_i], K[i-1][w])$
+			\item Given that the knapsack weight does not change, the value of the potential item and a subset of items does not exceed the maximum value for $i-1$ items.\\
+			Therefore, $K[i,j] = K[i-1,j]$.
+		\end{itemize}
+		\item Another way to look at step c:
+		\begin{itemize}
+			\item Given the column index $j$, it also represents the current maximum weight of the knapsack. Then $K[i][j- wt_i]$ represents a cell in which it is the maximum value for $i$ items and when the maximum knapsack weight is $j - wt_i$.
+			\item So $K[i-1][j - wt_i]$ represents the maximum value for when there is one item less and when there is enough room for the new item. The sum of this and the value of the potential candidate item becomes the maximum value for when you add the new item.
+		\end{itemize}
+	\end{enumerate}
+ \end{enumerate}
+
+\subsection*{Complexity}
+$$
+O(nW)
+$$
+
+\subsection{Example}
+\textbf{Given a knapsack with $W = 2$, $v = \{ 10, 20, 30 \}$, and $wt = \{ 1, 1, 1 \}$, find the maximum value possible.}
+
+\subsubsection*{Initialization}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| c | c | c | c |}
+		\hline
+				&	w = 0	&	w = 1	&	w = 2\\
+		\hline
+		n = 0	&	0		&	0	&	0\\
+		\hline
+		n = 1	&	0		&		&	\\
+		\hline
+		n = 2	&	0		&		&	\\
+		\hline
+		n = 3	&	0		&		&	\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 1}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| c | c | c | c |}
+		\hline
+				&	w = 0	&	w = 1	&	w = 2\\
+		\hline
+		n = 0	&	0		&	0	&	0\\
+		\hline
+		n = 1	&	0		&	10	&	10\\
+		\hline
+		n = 2	&	0		&		&	\\
+		\hline
+		n = 3	&	0		&		&	\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 2}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| c | c | c | c |}
+		\hline
+		&	w = 0	&	w = 1	&	w = 2\\
+		\hline
+		n = 0	&	0		&	0	&	0\\
+		\hline
+		n = 1	&	0		&	10	&	10\\
+		\hline
+		n = 2	&	0		&	20	&	30\\
+		\hline
+		n = 3	&	0		&		&	\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 3}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| c | c | c | c |}
+		\hline
+		&	w = 0	&	w = 1	&	w = 2\\
+		\hline
+		n = 0	&	0		&	0	&	0\\
+		\hline
+		n = 1	&	0		&	10	&	10\\
+		\hline
+		n = 2	&	0		&	20	&	30\\
+		\hline
+		n = 3	&	0		&	30	&	50\\
+		\hline
+	\end{tabular}
+\end{table}

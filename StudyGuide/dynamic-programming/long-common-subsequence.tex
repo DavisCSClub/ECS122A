@@ -1,1 +1,216 @@
 \section{Case Study: Longest Common Subsequence}
+
+\subsection*{Problem Statement}
+Given that a sequence is defined as $s = \{ a_1, a_2, a_3, ... a_n \}$ and given a set of sequences $S = \{ s_1, s_2, ... s_n \}$, find the longest subsequence common to all sequences in the set.\\\\
+Note that subsequence is different from substring in that subsequences do not need to occupy consecutive positions.
+
+\subsection*{Steps}
+*** These steps assume that the of sequences consists of only two sequences -- $s_1$ and $s_2$. Nonetheless this algorithm can be made to be applied over an entire set.
+\begin{enumerate}
+	\item Define $m$ as the length of the subsequence $s_1$.
+	\item Define $n$ as the length of the subsequence $s_2$.
+	\item Create a $c$ table and a $b$ table each of whose dimensions are $(m + 1) \times (n + 1)$. The $c$ table will represent the continuous sum for a given subsequence. The $b$ table will represent the direction to build the subsequence.
+	\item For both tables, set all cells with column index 0 to 0. For future references, this column will remain 0 and unalterable.
+	\item For both tables, set all cells with row index 0 to 0. For future references, this row will remain 0 and unalterable.
+	\item For row indices 1 to $m$, each will represent an element in the subsequence $s_1$. Example: Row index 1 represents the element $a_1$ from the sequence $s_1$.
+	\item For column indices 1 to $n$, each will represent an element in the subsequence $s_2$. Example: Column index $n$ represents the element $a_n$ from the sequence $s_2$.
+	\item Iterate through all cells starting from $i = 1, j = 1$. Whenever $j = m$, increase the value of $i$ and set $j = 1$. This is to avoid entering the 0-column. 
+	\item For a given cell $c[i,j]$:
+	\begin{itemize}
+		\item If $a_i \in s_i$ is the same letter as $a_j \in s_j$, then set $c[i,j] = c[i-1,j-1]+1$ and set $b[i,j] = \nwarrow$.
+		\item If $a_i \in s_i$ does not match $a_j \in s_j$, then compare the cell to the immediate left $(c[i,j-1])$ and the cell immediately above $(c[i-1,j])$. Set $c[i,j]$ equivalent to the largest value and set $b[i,j]$ to the direction of the largest value. If both values are equivalent, then default to the cell immediately above.
+	\end{itemize}
+	\item Once the $c$ and $b$ table are completed, start from the cell $b[m,n]$.
+	\item Follow the direction of the arrows and until $i = 0$ or $j = 0$.
+	\item Whenever the direction of the arrow is $\nwarrow$, then that alphabet is part of the longest common subsequence.
+\end{enumerate}
+
+\subsection*{Complexity}
+$$
+\text{Time: } \Theta(mn)
+$$
+$$
+\text{Space: } \Theta(mn)
+$$
+
+\subsection{Example}
+\textbf{Given that $s_1 = \{ B,D,C,A,B,A \}$ and $s_2 = \{ A,B,C,B,D,A,B \}$, find the longest common subsequence.}\\\\
+The $c$ and $b$ table will be combined into a single table for this example. The value in the corner will denote $b[i,j]$.
+
+\subsubsection*{Initialization}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} |}
+			\hline
+				&		&	A	&	B	&	C	&	B	&	D	&	A	&	B\\
+			\hline
+				&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+			\hline
+			B	&	0	&&&&&&&\\
+			\hline
+			D	&	0&&&&&&&\\
+			\hline
+			C	&	0&&&&&&&\\
+			\hline
+			A	&	0&&&&&&&\\
+			\hline
+			B	&	0&&&&&&&\\
+			\hline
+			A	&	0&&&&&&&\\
+			\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 1}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} |}
+		\hline
+			&		&	A			&	B			&	C				&	B			&	D				&	A	&	B\\
+		\hline
+			&	0	&	0			&	0			&	0				&	0			&	0				&	0	&	0\\
+		\hline
+		B	&	0	&	\uparrow_0	&	\nwarrow_1	&	\leftarrow_1	&	\nwarrow_1 	&	\leftarrow_1	&	\leftarrow_1	&  \nwarrow_1\\
+		\hline
+		D	&	0&&&&&&&\\
+		\hline
+		C	&	0&&&&&&&\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+		B	&	0&&&&&&&\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 2}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} |}
+		\hline
+				&		&	A			&	B			&	C				&	B			&	D				&	A	&	B\\
+		\hline
+				&	0	&	0			&	0			&	0				&	0			&	0				&	0	&	0\\
+		\hline
+		B	&	0	&	\uparrow_0	&	\nwarrow_1	&	\leftarrow_1	&	\nwarrow_1 	&	\leftarrow_1	&	\leftarrow_1	&  \nwarrow_1\\
+		\hline
+		D	&	0	&	\uparrow_0	&	\uparrow_1	&	\uparrow_1		&	\uparrow_1	&	\nwarrow_2		&	\leftarrow_2		&	\leftarrow_2\\
+		\hline
+		C	&	0&&&&&&&\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+		B	&	0&&&&&&&\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 3}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} |}
+		\hline
+				&		&	A			&	B			&	C				&	B			&	D				&	A	&	B\\
+		\hline
+				&	0	&	0			&	0			&	0				&	0			&	0				&	0	&	0\\
+		\hline
+		B	&	0	&	\uparrow_0	&	\nwarrow_1	&	\leftarrow_1	&	\nwarrow_1 	&	\leftarrow_1	&	\leftarrow_1	&  \nwarrow_1\\
+		\hline
+		D	&	0	&	\uparrow_0	&	\uparrow_1	&	\uparrow_1		&	\uparrow_1	&	\nwarrow_2		&	\leftarrow_2		&	\leftarrow_2\\
+		\hline
+		C	&	0	&	\uparrow_0	&	\uparrow_1	&	\nwarrow_2		&	\leftarrow_2&	\uparrow_2		&	\uparrow_2			&	\uparrow_2\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+		B	&	0&&&&&&&\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 4}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} |}
+		\hline
+			&		&	A			&	B			&	C				&	B			&	D				&	A	&	B\\
+		\hline
+			&	0	&	0			&	0			&	0				&	0			&	0				&	0	&	0\\
+		\hline
+		B	&	0	&	\uparrow_0	&	\nwarrow_1	&	\leftarrow_1	&	\nwarrow_1 	&	\leftarrow_1	&	\leftarrow_1	&  \nwarrow_1\\
+		\hline
+		D	&	0	&	\uparrow_0	&	\uparrow_1	&	\uparrow_1		&	\uparrow_1	&	\nwarrow_2		&	\leftarrow_2		&	\leftarrow_2\\
+		\hline
+		C	&	0	&	\uparrow_0	&	\uparrow_1	&	\nwarrow_2		&	\leftarrow_2&	\uparrow_2		&	\uparrow_2			&	\uparrow_2\\
+		\hline
+		A	&	0	&	\nwarrow_1	&	\uparrow_1	&	\uparrow_2		&	\uparrow_2	&	\uparrow_2		&	\nwarrow_3			& \leftarrow_3\\
+		\hline
+		B	&	0&&&&&&&\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 5}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} |}
+		\hline
+		&		&	A			&	B			&	C				&	B			&	D				&	A	&	B\\
+		\hline
+		&	0	&	0			&	0			&	0				&	0			&	0				&	0	&	0\\
+		\hline
+		B	&	0	&	\uparrow_0	&	\nwarrow_1	&	\leftarrow_1&	\nwarrow_1 	&	\leftarrow_1	&	\leftarrow_1	&  \nwarrow_1\\
+		\hline
+		D	&	0	&	\uparrow_0	&	\uparrow_1	&	\uparrow_1	&	\uparrow_1	&	\nwarrow_2		&	\leftarrow_2		&	\leftarrow_2\\
+		\hline
+		C	&	0	&	\uparrow_0	&	\uparrow_1	&	\nwarrow_2	&	\leftarrow_2&	\uparrow_2		&	\uparrow_2			&	\uparrow_2\\
+		\hline
+		A	&	0	&	\nwarrow_1	&	\uparrow_1	&	\uparrow_2	&	\uparrow_2	&	\uparrow_2		&	\nwarrow_3			& \leftarrow_3\\
+		\hline
+		B	&	0	&	\uparrow_1	&	\nwarrow_2	&	\uparrow_2	&	\nwarrow_3	&	\leftarrow_3	&	\uparrow_3			&\nwarrow_4\\
+		\hline
+		A	&	0&&&&&&&\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Row 6}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} | >{$}c<{$} |}
+		\hline
+			&		&	A			&	B			&	C				&	B			&	D				&	A	&	B\\
+		\hline
+			&	0	&	0			&	0			&	0				&	0			&	0				&	0	&	0\\
+		\hline
+		B	&	0	&	\uparrow_0	&	\nwarrow_1	&	\leftarrow_1&	\nwarrow_1 	&	\leftarrow_1	&	\leftarrow_1	&  \nwarrow_1\\
+		\hline
+		D	&	0	&	\uparrow_0	&	\uparrow_1	&	\uparrow_1	&	\uparrow_1	&	\nwarrow_2		&	\leftarrow_2		&	\leftarrow_2\\
+		\hline
+		C	&	0	&	\uparrow_0	&	\uparrow_1	&	\nwarrow_2	&	\leftarrow_2&	\uparrow_2		&	\uparrow_2			&	\uparrow_2\\
+		\hline
+		A	&	0	&	\nwarrow_1	&	\uparrow_1	&	\uparrow_2	&	\uparrow_2	&	\uparrow_2		&	\nwarrow_3			& \leftarrow_3\\
+		\hline
+		B	&	0	&	\uparrow_1	&	\nwarrow_2	&	\uparrow_2	&	\nwarrow_3	&	\leftarrow_3	&	\uparrow_3			&\nwarrow_4\\
+		\hline
+		A	&	0	&	\nwarrow_1	&	\uparrow_2	&	\uparrow_2	&	\uparrow_3	&	\uparrow_3		&	\nwarrow_4			&\uparrow_4\\
+		\hline
+	\end{tabular}
+\end{table}
+$$
+\text{Longest Common Subsequence: } BDAB
+$$
