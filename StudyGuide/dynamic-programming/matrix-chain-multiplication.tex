@@ -1,1 +1,80 @@
 \section{Case Study: Matrix Chain Multiplication}
+
+\subsection*{Problem Statement}
+Given a sequence of matrices $A_1, A_2, ... A_n$ with order $p_{i-1} \times p_i$, find the ordering for the product of $A_1 \times A_2 \times A_3 ... \times A_n$ such that it minimizes the number of scalar multiplications.
+
+\subsection*{Important}
+The matrix is 1-indexed while the sequence for the order of matrices is 0-indexed.
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item Given the orders of the matrices, create a matrix $m$ and a matrix $s$ of order $(n-1) \times (n-1)$.
+	\item Zero out the main diagonal ($m[i,i] = 0$ and $s[i,i] = 0$).
+	\item Each iteration creates a new diagonal that builds the upper right triangle of the $m$ and $s$ matrix.
+	\item Start from the $i = 1$ and build down the diagonal.
+	\item For each diagonal:
+	\begin{enumerate}
+		\item For each cell on the diagonal, find the minimum such that:\\
+			$m[i,j] = \min\limits_{i\leq k < j} \{ m[i,k] + m[k+1,j] + p_{i-1}p_kp_j \}$. 
+		\item $s[i,j]$ will be the $k$ that attains the minimum value of $m[i,j]$.
+	\end{enumerate}
+	\item A more visual method and informal method for each diagonal (Same as Step 4):
+	\begin{enumerate}
+		\item For a given cell we are trying to calculate, we will denote it as $m[i,j]$.
+		\item Imagine that there exists a sliding window of size $i + j$ number of cells that curves down at $m[i,j]$.
+		\item The end points of the sliding window are the left cell $(m[i,k])$ and the bottom cell $(m[k+1,j])$.
+		\item Set the left cell as a cell on the main diagonal and on the same row as the cell we are trying to calculate. 
+		\item Based on the constraint, this will also set the bottom cell is immediately below the current cell we are trying to calculate.
+		\item Two of the orders are constant -- $p_{i-1}$ and $p_j$. The only order that changes is $p_k$ and $k$ can be easily determined by the column index of the left cell. From that you can calculate the product of orders $p_{i-1}p_k p_j$.
+		\item Sum the value of the left cell, right cell, and the product of orders.
+		\item Slide the window by increasing the column index in the left cell. Based on the sliding window constraint, the row index of the bottom cell must increase. Repeat steps 6a--6h until the entire sliding window is on row $j$ (This also means that the left cell is $m[i,j]$).
+		\item The minimum of all these calculated values will be the value of $m[i,j]$. The left cell that achieved the minimum value will have its column index be the value of $s[i,j]$.
+	\end{enumerate}
+\end{enumerate}
+
+\subsection*{Parenthesizing Based on $s$ Matrix}
+\begin{enumerate}
+	\item Start from the upper-right corner $(i = 1, j = n)$.
+	\item Split into a binary tree and wrap the root with a pair of parentheses.
+	\begin{itemize}
+		\item The left will repeat this process, but from $i = i$ and $j = s[i,j]$.
+		\item The right will repeat this process, but from $i= s[i,j] + 1$ and $j = j$.
+	\end{itemize}
+	\item Whenever $i = j$, then the print $A_i$.
+\end{enumerate}
+\subsection*{Complexity}
+$$
+\text{Time: } O(n^3)
+$$
+$$
+\text{Space: } O(n^2)
+$$
+
+\subsection{Example}
+\textbf{Let A be defined as the sequence $\{ A_1, A_2, A_3, A_4 \}$ and their orders\\ P = \{ 10, 100, 5, 50, 1  \}. Find the optimal parenthesization.}
+
+\subsubsection*{Initialization}
+\begin{minipage}{0.5\linewidth}
+	$$
+	m\text{-table}=
+	\begin{bmatrix}
+	0	&		&		&		&		\\
+	&	0	&		&		&		\\
+	&		&	0	&		&			\\			
+	&		&		&	0	&		\\
+	&		&		&		&	0	
+	\end{bmatrix}
+	$$
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+$$
+s\text{-table}=
+\begin{bmatrix}
+0	&		&		&		&		\\
+&	0	&		&		&		\\
+&		&	0	&		&			\\			
+&		&		&	0	&		\\
+&		&		&		&	0	
+\end{bmatrix}
+$$
+\end{minipage}
