@@ -60,7 +60,9 @@
 \contentsline {subsection}{\numberline {6.8.1}Example}{65}
 \contentsline {section}{\numberline {6.9}Bellman-Ford Algorithm}{68}
 \contentsline {subsection}{\numberline {6.9.1}Example}{69}
-\contentsline {chapter}{\numberline {7}Side Topics}{71}
-\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{72}
-\contentsline {subsection}{\numberline {7.1.1}Example}{72}
-\contentsline {subsection}{\numberline {7.1.2}Example}{73}
+\contentsline {chapter}{\numberline {7}P versus NP}{71}
+\contentsline {section}{\numberline {7.1}Definitions}{72}
+\contentsline {chapter}{\numberline {8}Side Topics}{73}
+\contentsline {section}{\numberline {8.1}Proof by Mathematical Induction}{74}
+\contentsline {subsection}{\numberline {8.1.1}Example}{74}
+\contentsline {subsection}{\numberline {8.1.2}Example}{75}
