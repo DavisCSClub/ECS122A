@@ -54,7 +54,13 @@
 \contentsline {section}{\numberline {6.6}Case Study: Depth-First Search (DFS)}{57}
 \contentsline {subsection}{\numberline {6.6.1}Definitions}{57}
 \contentsline {subsection}{\numberline {6.6.2}Example}{58}
-\contentsline {chapter}{\numberline {7}Side Topics}{63}
-\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{64}
-\contentsline {subsection}{\numberline {7.1.1}Example}{64}
-\contentsline {subsection}{\numberline {7.1.2}Example}{65}
+\contentsline {section}{\numberline {6.7}Directed Acyclic Graph}{63}
+\contentsline {subsection}{\numberline {6.7.1}Topological Sort}{63}
+\contentsline {section}{\numberline {6.8}Dijkstra's Algorithm}{64}
+\contentsline {subsection}{\numberline {6.8.1}Example}{65}
+\contentsline {section}{\numberline {6.9}Bellman-Ford Algorithm}{68}
+\contentsline {subsection}{\numberline {6.9.1}Example}{69}
+\contentsline {chapter}{\numberline {7}Side Topics}{71}
+\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{72}
+\contentsline {subsection}{\numberline {7.1.1}Example}{72}
+\contentsline {subsection}{\numberline {7.1.2}Example}{73}

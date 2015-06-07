@@ -1,0 +1,596 @@
+\section{Dijkstra's Algorithm}
+
+\subsection*{Description}
+Algorithm for finding the shortest paths between nodes in a graph.
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item For all vertices, define their distance to be $\infty$ and from a $nil$ source.
+	\item Given the vertex $v$ to start, set its distance to 0.
+	\item For every iteration:
+	\begin{enumerate}
+		\item Choose the vertex $u$ that has not been visited and has the smallest distance.
+		\item Mark that vertex as visited.
+		\item For a given adjacent vertex $w$ that is connected to vertex $u$, update the distance of $w$ if $w$ has not been visited and the sum of the distance value of $u$ and edge weight that connects $u$ to $w$ is less than the distance value $w$ already holds.\\
+		$\text{Distance}(w) = \min\{ \text{Distance(u)} + \text{Weight}(u,w),  \text{Distance}(w)  \}$
+	\end{enumerate}
+	\item Repeat the iterations until all vertices are marked as visited.
+\end{enumerate}
+
+\subsection*{Complexity}
+$$
+O(\vert E \vert + \vert V \vert \log( \vert V \vert) )
+$$
+
+\newpage
+
+\subsection{Example}
+\textbf{Given the following graph $G$, perform Dijkstra's algorithm starting from vertex $a$.}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [above right of=a] {b};
+	\node[main node] (c) [below right of=a] {c};
+	\node[main node] (d) [right of=b] {d};
+	\node[main node] (e) [right of=c] {e};
+	\node[main node] (f) [right of=d] {f};
+	\node[main node] (g) [right of=e] {g};
+	\node[main node] (h) [above right of=g] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {4} (b)
+	(a)	edge node [] {8} (c)
+	(b)	edge node [] {11} (c)
+	(b) edge node [] {8} (d)
+	(c)	edge node [] {1} (e)
+	(c)	edge node [right] {7} (d)
+	(d) edge node [] {7} (f)
+	(d) edge node [] {4} (g)
+	(e) edge node [] {2} (g)
+	(f) edge node [] {14} (g)
+	(f) edge node [] {9} (h)
+	(g) edge node [below] {10} (h);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Initialization}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	\\
+		\hline
+		b		&	\infty			&	nil				&	\\
+		\hline
+		c		&	\infty			&	nil				&	\\
+		\hline
+		d		&	\infty			&	nil				&	\\
+		\hline
+		e		&	\infty			&	nil				&	\\
+		\hline
+		f		&	\infty			&	nil				&	\\
+		\hline
+		g		&	\infty			&	nil				&	\\
+		\hline
+		h		&	\infty			&	nil				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+\begin{figure}[H]
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [above right of=a] {b};
+	\node[main node] (c) [below right of=a] {c};
+	\node[main node] (d) [right of=b] {d};
+	\node[main node] (e) [right of=c] {e};
+	\node[main node] (f) [right of=d] {f};
+	\node[main node] (g) [right of=e] {g};
+	\node[main node] (h) [above right of=g] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {4} (b)
+	(a)	edge node [] {8} (c)
+	(b)	edge node [] {11} (c)
+	(b) edge node [] {8} (d)
+	(c)	edge node [] {1} (e)
+	(c)	edge node [right] {7} (d)
+	(d) edge node [] {7} (f)
+	(d) edge node [] {4} (g)
+	(e) edge node [] {2} (g)
+	(f) edge node [] {14} (g)
+	(f) edge node [] {9} (h)
+	(g) edge node [below] {10} (h);
+	\end{tikzpicture}
+\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex a}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	\\
+		\hline
+		c		&	8				&	a				&	\\
+		\hline
+		d		&	\infty			&	nil				&	\\
+		\hline
+		e		&	\infty			&	nil				&	\\
+		\hline
+		f		&	\infty			&	nil				&	\\
+		\hline
+		g		&	\infty			&	nil				&	\\
+		\hline
+		h		&	\infty			&	nil				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node] (b) [above right of=a] {b};
+		\node[main node] (c) [below right of=a] {c};
+		\node[main node] (d) [right of=b] {d};
+		\node[main node] (e) [right of=c] {e};
+		\node[main node] (f) [right of=d] {f};
+		\node[main node] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex b}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	x\\
+		\hline
+		c		&	8				&	a				&	\\
+		\hline
+		d		&	12				&	b				&	\\
+		\hline
+		e		&	\infty			&	nil				&	\\
+		\hline
+		f		&	\infty			&	nil				&	\\
+		\hline
+		g		&	\infty			&	nil				&	\\
+		\hline
+		h		&	\infty			&	nil				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node, fill=gray] (b) [above right of=a] {b};
+		\node[main node] (c) [below right of=a] {c};
+		\node[main node] (d) [right of=b] {d};
+		\node[main node] (e) [right of=c] {e};
+		\node[main node] (f) [right of=d] {f};
+		\node[main node] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex c}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	x\\
+		\hline
+		c		&	8				&	a				&	x\\
+		\hline
+		d		&	12				&	b				&	\\
+		\hline
+		e		&	9				&	c				&	\\
+		\hline
+		f		&	\infty			&	nil				&	\\
+		\hline
+		g		&	\infty			&	nil				&	\\
+		\hline
+		h		&	\infty			&	nil				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node, fill=gray] (b) [above right of=a] {b};
+		\node[main node, fill=gray] (c) [below right of=a] {c};
+		\node[main node] (d) [right of=b] {d};
+		\node[main node] (e) [right of=c] {e};
+		\node[main node] (f) [right of=d] {f};
+		\node[main node] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex e}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	x\\
+		\hline
+		c		&	8				&	a				&	x\\
+		\hline
+		d		&	12				&	b				&	\\
+		\hline
+		e		&	9				&	c				&	x\\
+		\hline
+		f		&	\infty			&	nil				&	\\
+		\hline
+		g		&	11				&	e				&	\\
+		\hline
+		h		&	\infty			&	nil				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node, fill=gray] (b) [above right of=a] {b};
+		\node[main node, fill=gray] (c) [below right of=a] {c};
+		\node[main node] (d) [right of=b] {d};
+		\node[main node, fill=gray] (e) [right of=c] {e};
+		\node[main node] (f) [right of=d] {f};
+		\node[main node] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex g}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	x\\
+		\hline
+		c		&	8				&	a				&	x\\
+		\hline
+		d		&	12				&	b				&	\\
+		\hline
+		e		&	9				&	c				&	x\\
+		\hline
+		f		&	\infty			&	nil				&	\\
+		\hline
+		g		&	11				&	e				&	x\\
+		\hline
+		h		&	21				&	g				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node, fill=gray] (b) [above right of=a] {b};
+		\node[main node, fill=gray] (c) [below right of=a] {c};
+		\node[main node] (d) [right of=b] {d};
+		\node[main node, fill=gray] (e) [right of=c] {e};
+		\node[main node] (f) [right of=d] {f};
+		\node[main node, fill=gray] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex d}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	x\\
+		\hline
+		c		&	8				&	a				&	x\\
+		\hline
+		d		&	12				&	b				&	x\\
+		\hline
+		e		&	9				&	c				&	x\\
+		\hline
+		f		&	19				&	d				&	\\
+		\hline
+		g		&	11				&	e				&	x\\
+		\hline
+		h		&	21				&	g				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node, fill=gray] (b) [above right of=a] {b};
+		\node[main node, fill=gray] (c) [below right of=a] {c};
+		\node[main node, fill=gray] (d) [right of=b] {d};
+		\node[main node, fill=gray] (e) [right of=c] {e};
+		\node[main node] (f) [right of=d] {f};
+		\node[main node, fill=gray] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex f}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	x\\
+		\hline
+		c		&	8				&	a				&	x\\
+		\hline
+		d		&	12				&	b				&	x\\
+		\hline
+		e		&	9				&	c				&	x\\
+		\hline
+		f		&	19				&	d				&	x\\
+		\hline
+		g		&	11				&	e				&	x\\
+		\hline
+		h		&	21				&	g				&	\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node, fill=gray] (b) [above right of=a] {b};
+		\node[main node, fill=gray] (c) [below right of=a] {c};
+		\node[main node, fill=gray] (d) [right of=b] {d};
+		\node[main node, fill=gray] (e) [right of=c] {e};
+		\node[main node, fill=gray] (f) [right of=d] {f};
+		\node[main node, fill=gray] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Visit Vertex h}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |c|}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}	&	Visited\\
+		\hline
+		a		&	0				&	nil				&	x\\
+		\hline
+		b		&	4				&	a				&	x\\
+		\hline
+		c		&	8				&	a				&	x\\
+		\hline
+		d		&	12				&	b				&	x\\
+		\hline
+		e		&	9				&	c				&	x\\
+		\hline
+		f		&	19				&	d				&	x\\
+		\hline
+		g		&	11				&	e				&	x\\
+		\hline
+		h		&	21				&	g				&	x\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node, fill=gray] (a) {a};
+		\node[main node, fill=gray] (b) [above right of=a] {b};
+		\node[main node, fill=gray] (c) [below right of=a] {c};
+		\node[main node, fill=gray] (d) [right of=b] {d};
+		\node[main node, fill=gray] (e) [right of=c] {e};
+		\node[main node, fill=gray] (f) [right of=d] {f};
+		\node[main node, fill=gray] (g) [right of=e] {g};
+		\node[main node, fill=gray] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(e) edge node [] {2} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Solution}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {a};
+		\node[main node] (b) [above right of=a] {b};
+		\node[main node] (c) [below right of=a] {c};
+		\node[main node] (d) [right of=b] {d};
+		\node[main node] (e) [right of=c] {e};
+		\node[main node] (f) [right of=d] {f};
+		\node[main node] (g) [right of=e] {g};
+		\node[main node] (h) [above right of=g] {h};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(d) edge node [] {7} (f)
+		(e) edge node [] {2} (g)
+		(g) edge node [below] {10} (h);
+		\end{tikzpicture}
+	\end{figure}

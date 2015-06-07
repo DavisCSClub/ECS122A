@@ -1,0 +1,428 @@
+\section{Bellman-Ford Algorithm}
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item For every vertex $v \in V$, if the vertex is starting vertex then set its distance to 0. Otherwise, set its distance to $\infty$.
+	\item Also for every vertex $v \in V$, set the source to $nil$.
+	\item Repeat the following process $\vert V \vert - 1$ times:
+	\begin{enumerate}
+		\item For every edge $e = (u,v) \in E$ with weight $w$, calculate the $\text{candidate} = \text{distance}(u) + w$.
+		\item If candidate $< \text{distance}(v)$, then $\text{distance}(v) = \text{candidate}$ and source($v$) = $u$.
+		\item Otherwise, $\text{distance}(v)$ remains the same.\\
+			Essentially: $\text{distance}(v) = \min\{ \text{distance}(u) + w, \text{distance}(v)   \}$
+	\end{enumerate}
+	\item Lastly, check for negative-weight cycles:
+	\begin{enumerate}
+		\item For every edge $e = (u,v) \in E$, calculate: $\text{distance}(u) + w$. If this sum is less than $\text{distance}(v)$ then the graph contains a negative-weight cycle.
+		\item Return FALSE on negative-weight cycle.
+	\end{enumerate}
+\end{enumerate}
+
+\subsection*{Complexity}
+$$
+O(\vert V \vert \vert E \vert)
+$$
+
+\newpage
+
+\subsection{Example}
+\textbf{Given the following graph $G$, perform Bellman-Ford algorithm starting from vertex $a$.}\\
+***Assume all edges are processed in lexical order: $(a,b), (a,c), (b,c), (b,d), (c,d), (c,e), (d,f), (d,g), (f,g), (f,h), (g,h)$
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [above right of=a] {b};
+	\node[main node] (c) [below right of=a] {c};
+	\node[main node] (d) [right of=b] {d};
+	\node[main node] (e) [right of=c] {e};
+	\node[main node] (f) [right of=d] {f};
+	\node[main node] (g) [right of=e] {g};
+	\node[main node] (h) [above right of=g] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {4} (b)
+	(a)	edge node [] {8} (c)
+	(b)	edge node [] {11} (c)
+	(b) edge node [] {8} (d)
+	(c)	edge node [] {1} (e)
+	(c)	edge node [right] {7} (d)
+	(d) edge node [] {7} (f)
+	(d) edge node [] {4} (g)
+	(f) edge node [] {14} (g)
+	(f) edge node [] {9} (h)
+	(g) edge node [below] {10} (h)
+	(g) edge node [] {-10} (e);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Initialization}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}\\
+		\hline
+		a		&	0				&	nil				\\
+		\hline
+		b		&	\infty			&	nil				\\
+		\hline
+		c		&	\infty			&	nil				\\
+		\hline
+		d		&	\infty			&	nil				\\
+		\hline
+		e		&	\infty			&	nil				\\
+		\hline
+		f		&	\infty			&	nil				\\
+		\hline
+		g		&	\infty			&	nil				\\
+		\hline
+		h		&	\infty			&	nil				\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {$a_0$};
+		\node[main node] (b) [above right of=a] {$b_\infty$};
+		\node[main node] (c) [below right of=a] {$c_\infty$};
+		\node[main node] (d) [right of=b] {$d_\infty$};
+		\node[main node] (e) [right of=c] {$e_\infty$};
+		\node[main node] (f) [right of=d] {$f_\infty$};
+		\node[main node] (g) [right of=e] {$g_\infty$};
+		\node[main node] (h) [above right of=g] {$h_\infty$};
+		
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {4} (b)
+	(a)	edge node [] {8} (c)
+	(b)	edge node [] {11} (c)
+	(b) edge node [] {8} (d)
+	(c)	edge node [] {1} (e)
+	(c)	edge node [right] {7} (d)
+	(d) edge node [] {7} (f)
+	(d) edge node [] {4} (g)
+	(f) edge node [] {14} (g)
+	(f) edge node [] {9} (h)
+	(g) edge node [below] {10} (h)
+	(g) edge node [] {-10} (e);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Iteration 1}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}\\
+		\hline
+		a		&	0				&	nil				\\
+		\hline
+		b		&	4				&	a				\\
+		\hline
+		c		&	8				&	a				\\
+		\hline
+		d		&	\infty				&	nil				\\
+		\hline
+		e		&	\infty				&	nil			\\
+		\hline
+		f		&	\infty			&	nil				\\
+		\hline
+		g		&	\infty			&	nil				\\
+		\hline
+		h		&	\infty			&	nil				\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {$a_0$};
+		\node[main node] (b) [above right of=a] {$b_4$};
+		\node[main node] (c) [below right of=a] {$c_8$};
+		\node[main node] (d) [right of=b] {$d_{\infty}$};
+		\node[main node] (e) [right of=c] {$e_\infty$};
+		\node[main node] (f) [right of=d] {$f_\infty$};
+		\node[main node] (g) [right of=e] {$g_\infty$};
+		\node[main node] (h) [above right of=g] {$h_\infty$};
+
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {4} (b)
+	(a)	edge node [] {8} (c)
+	(b)	edge node [] {11} (c)
+	(b) edge node [] {8} (d)
+	(c)	edge node [] {1} (e)
+	(c)	edge node [right] {7} (d)
+	(d) edge node [] {7} (f)
+	(d) edge node [] {4} (g)
+	(f) edge node [] {14} (g)
+	(f) edge node [] {9} (h)
+	(g) edge node [below] {10} (h)
+	(g) edge node [] {-10} (e);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Iteration 2}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}\\
+		\hline
+		a		&	0				&	nil				\\
+		\hline
+		b		&	4				&	a				\\
+		\hline
+		c		&	8				&	a				\\
+		\hline
+		d		&	12				&	b				\\
+		\hline
+		e		&	9				&	c			\\
+		\hline
+		f		&	\infty			&	nil				\\
+		\hline
+		g		&	\infty			&	nil				\\
+		\hline
+		h		&	\infty			&	nil				\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {$a_0$};
+		\node[main node] (b) [above right of=a] {$b_4$};
+		\node[main node] (c) [below right of=a] {$c_8$};
+		\node[main node] (d) [right of=b] {$d_{12}$};
+		\node[main node] (e) [right of=c] {$e_9$};
+		\node[main node] (f) [right of=d] {$f_\infty$};
+		\node[main node] (g) [right of=e] {$g_\infty$};
+		\node[main node] (h) [above right of=g] {$h_\infty$};
+		
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {4} (b)
+	(a)	edge node [] {8} (c)
+	(b)	edge node [] {11} (c)
+	(b) edge node [] {8} (d)
+	(c)	edge node [] {1} (e)
+	(c)	edge node [right] {7} (d)
+	(d) edge node [] {7} (f)
+	(d) edge node [] {4} (g)
+	(f) edge node [] {14} (g)
+	(f) edge node [] {9} (h)
+	(g) edge node [below] {10} (h)
+	(g) edge node [] {-10} (e);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Iteration 3}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}\\
+		\hline
+		a		&	0				&	nil				\\
+		\hline
+		b		&	4				&	a				\\
+		\hline
+		c		&	8				&	a				\\
+		\hline
+		d		&	12				&	b				\\
+		\hline
+		e		&	9				&	c			\\
+		\hline
+		f		&	19				&	d				\\
+		\hline
+		g		&	16				&	d				\\
+		\hline
+		h		&	\infty			&	nil				\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {$a_0$};
+		\node[main node] (b) [above right of=a] {$b_4$};
+		\node[main node] (c) [below right of=a] {$c_8$};
+		\node[main node] (d) [right of=b] {$d_{12}$};
+		\node[main node] (e) [right of=c] {$e_9$};
+		\node[main node] (f) [right of=d] {$f_{19}$};
+		\node[main node] (g) [right of=e] {$g_{16}$};
+		\node[main node] (h) [above right of=g] {$h_\infty$};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h)
+		(g) edge node [] {-10} (e);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Iteration 4}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}\\
+		\hline
+		a		&	0				&	nil				\\
+		\hline
+		b		&	4				&	a				\\
+		\hline
+		c		&	8				&	a				\\
+		\hline
+		d		&	12				&	b				\\
+		\hline
+		e		&	6				&	g			\\
+		\hline
+		f		&	19				&	d				\\
+		\hline
+		g		&	16				&	d				\\
+		\hline
+		h		&	26				&	g				\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {$a_0$};
+		\node[main node] (b) [above right of=a] {$b_4$};
+		\node[main node] (c) [below right of=a] {$c_8$};
+		\node[main node] (d) [right of=b] {$d_{12}$};
+		\node[main node] (e) [right of=c] {$e_6$};
+		\node[main node] (f) [right of=d] {$f_{19}$};
+		\node[main node] (g) [right of=e] {$g_{16}$};
+		\node[main node] (h) [above right of=g] {$h_{26}$};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h)
+		(g) edge node [] {-10} (e);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Iteration 5,6,7}
+
+\begin{minipage}{0.50\linewidth}
+	\begin{tabular}{| c |  >{$}c<{$} | >{$}c<{$} |}
+		\hline
+		Vertex	&	\text{Distance}	&	\text{Source}\\
+		\hline
+		a		&	0				&	nil				\\
+		\hline
+		b		&	4				&	a				\\
+		\hline
+		c		&	8				&	a				\\
+		\hline
+		d		&	12				&	b				\\
+		\hline
+		e		&	6				&	g			\\
+		\hline
+		f		&	19				&	d				\\
+		\hline
+		g		&	16				&	d				\\
+		\hline
+		h		&	26				&	g				\\
+		\hline
+	\end{tabular}
+\end{minipage}
+\qquad
+\begin{minipage}{0.50\linewidth}
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {$a_0$};
+		\node[main node] (b) [above right of=a] {$b_4$};
+		\node[main node] (c) [below right of=a] {$c_8$};
+		\node[main node] (d) [right of=b] {$d_{12}$};
+		\node[main node] (e) [right of=c] {$e_6$};
+		\node[main node] (f) [right of=d] {$f_{19}$};
+		\node[main node] (g) [right of=e] {$g_{16}$};
+		\node[main node] (h) [above right of=g] {$h_{26}$};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b)	edge node [] {11} (c)
+		(b) edge node [] {8} (d)
+		(c)	edge node [] {1} (e)
+		(c)	edge node [right] {7} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(f) edge node [] {14} (g)
+		(f) edge node [] {9} (h)
+		(g) edge node [below] {10} (h)
+		(g) edge node [] {-10} (e);
+		\end{tikzpicture}
+	\end{figure}
+\end{minipage}
+
+\subsubsection*{Solution}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+		thick,main node/.style={circle,draw}]
+		
+		\node[main node] (a) {$a$};
+		\node[main node] (b) [above right of=a] {$b$};
+		\node[main node] (c) [below right of=a] {$c$};
+		\node[main node] (d) [right of=b] {$d$};
+		\node[main node] (e) [right of=c] {$e$};
+		\node[main node] (f) [right of=d] {$f$};
+		\node[main node] (g) [right of=e] {$g$};
+		\node[main node] (h) [above right of=g] {$h$};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(a) edge node [] {4} (b)
+		(a)	edge node [] {8} (c)
+		(b) edge node [] {8} (d)
+		(d) edge node [] {7} (f)
+		(d) edge node [] {4} (g)
+		(g) edge node [below] {10} (h)
+		(g) edge node [] {-10} (e);
+		\end{tikzpicture}
+	\end{figure}
