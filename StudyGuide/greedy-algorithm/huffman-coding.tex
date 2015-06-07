@@ -1,18 +1,18 @@
 \section{Case Study: Huffman Coding}
 
-\subsection{Formal Problem Statement}
+\subsection*{Formal Problem Statement}
 Let A be defined as the set of alphabets. ( $A = \{ a_0, a_1, a_2, ..., a_n \}$ )\\
 Let W be defined as the set of weights for which $w_i = \text{Weight}(a_i)$.  ($W = \{ w_0, w_1, w_2, ..., w_n \}$)
 Let C be defined as the set of (binary) codewords for which $c_i = \text{CodeWord}(a_i)$.\\\\
 Assume there exists $n$ alphabets, each with a weight $w_i$. Find and define the codewords $c_i$ for each respective alphabet $a_i$ such that $\sum\limits_{i=0}^{n} w_i \cdot length(c_i)$ is the smallest possible.
 
-\subsection{Informal Problem Statement}
+\subsection*{Informal Problem Statement}
 Given a set of symbols and their weights (probabilities), find a prefix-free binary code with minimum expected codeword length.
 
-\subsection{Greedy Choice}
+\subsection*{Greedy Choice}
 Choose the two alphabets with the lowest weight. 
 
-\subsection{Steps}
+\subsection*{Steps}
 \begin{enumerate}
 	\item Pick two letters $x$ and $y$ from the alphabet A with the lowest frequencies or weight $w_i$.
 	\item Create a subtree with $x$ and $y$ as leaves. We will define the root as $z$.
@@ -23,6 +23,10 @@ Choose the two alphabets with the lowest weight.
 		$ A^\prime = A + \{ z \} $
 	\item Repeat this process until the set of alphabets $A$ consists of only one alphabet.
 \end{enumerate}
+
+\subsection*{Complexity}
+$$O(n \cdot lg(n))$$
+Total = $O(n \cdot lg(n)) + \Theta(n)$. Cost to sort alphabet by weight and cost to iterate through all alphabets.
 
 \newpage
 

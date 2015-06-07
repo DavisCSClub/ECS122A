@@ -1,22 +1,22 @@
 \section{Case Study: Activity-Selection}
 
-\subsection{Formal Problem Statement}
+\subsection*{Formal Problem Statement}
 Assume there exists $n$ activities, each with a start time $s_i$ and finish time $f_i$. Two activities $i$ and $j$ are said to be non-conflicting if $s_i \geq f_j$ or $s_j \geq f_i$. The objective is to find the maximum solution set of non-conflicting activities.
 
-\subsection{Informal Problem Statement}
+\subsection*{Informal Problem Statement}
 Given $n$ activities and their respective start ($s_i$) and finish ($f_i$) times, find the maximum number of activities that can be performed.
 
-\subsection{Greedy Choice}
+\subsection*{Greedy Choice}
 Choose the next activity with a start time greater than or equal to the previous activity's finish time and has the next smallest finish time.
 
-\subsection{Steps}
+\subsection*{Steps}
 \begin{enumerate}
 	\item Sort the activities according to their finish times. 
 	\item Select the first activity from the sorted list.
 	\item Repeat this process for the remaining activities with the condition that the start time of subsequent activities are greater than or equal to the preceding activity's finish time. 
 \end{enumerate}
 
-\subsection{Pseudocode}
+\subsection*{Pseudocode}
 \begin{algorithm}
 \begin{algorithmic}[1]
 \Procedure{ActivitySelection}{A}
@@ -34,3 +34,8 @@ Choose the next activity with a start time greater than or equal to the previous
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+\vspace{-1cm}
+\subsection*{Complexity}
+$$
+O(n \cdot lg(n))\footnote{Total Time = O($n \cdot lg(n)) + \Theta(n)$. Sort Time + Greedy Activity Selection. Sort time will dominate.}
+$$
