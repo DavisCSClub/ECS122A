@@ -1,0 +1,390 @@
+\section{Minimum Spanning Tree}
+
+\subsection{Definition}
+\textbf{Tree: } Graph in which any two vertices are connected by exactly one path.\\
+\textbf{Spanning Tree: } Subgraph of a graph that contains all vertices and is a tree.\\
+\textbf{Minimum Spanning Tree (MST): } A spanning tree with weight less than or equal to the weight of every other spanning tree. 
+
+\subsection{Algorithms}
+\begin{itemize}
+	\item Kruskal's
+	\item Prim's
+\end{itemize}
+
+\newpage
+
+\section{Minimum Spanning Tree: Kruskal's Algorithm}
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item Define a forest $F$ such that each vertex is a separate tree (Effectively remove all the edges so none of the vertices are connected).
+	\item Sort all the edges by their weights.
+	\item Add the least weight edge. If the edge combines two different trees, then add it to the forest $F$. If the two vertices are of the same tree, then this edge is not part of the minimum spanning tree.
+	\item Repeat until all vertices are connected into a single tree.
+\end{enumerate}
+
+\subsection*{Complexity}
+$$
+O(E \log(E)) = O(E \log V)
+$$
+Note that $E$ is at most $\vert V \vert^2$ which would make the complexity, $O(E \log(V^2)) = O(2E \log(V)) = O(E \log V)$.
+
+\newpage
+
+\subsection{Example}
+\textbf{Find the minimum spanning tree of the following graph using Kruskal's algorithm.}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge node [] {3} (b)
+	(e)	edge node [] {4} (b)
+	(e)	edge node [] {6} (c)
+	(e) edge node [] {7} (d)
+	(b) edge node [] {5} (c)
+	(c) edge node [] {2} (d);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Sort the edges}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c |c |c| c| c| c| c |c|}
+		\hline
+		Edge	&	(a,e)	&	(c,d)	&	(a,b)	&	(b,e)	&	(b,c)	&	(e,c)	&	(e,d)\\
+		\hline
+		Weight	&	1		&	2		&	3		&	4		&	5		&	6		&	7\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection*{Initial Graph}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Adding Edge (a,e)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Adding Edge (c,d)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(c) edge node [] {2} (d);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Adding Edge (a,b)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(c) edge node [] {2} (d)
+	(a) edge node [] {3} (b);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Adding Edge (b,e)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(c) edge node [] {2} (d)
+	(a) edge node [] {3} (b)
+	(b)	edge [dotted] node [below] {4} (e);
+	\end{tikzpicture}
+	\caption*{Cannot add this edge since it vertex b and vertex e are already in the same tree. }
+\end{figure}
+
+\subsubsection*{Adding Edge (b,c)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(c) edge node [] {2} (d)
+	(a) edge node [] {3} (b)
+	(b)	edge [] node [below] {5} (c);
+	\end{tikzpicture}
+	\caption*{All vertices in same tree. Therefore, minimum spanning tree has been derived.}
+\end{figure}
+
+\newpage
+
+\section{Minimum Spanning Tree: Prim's Algorithm}
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item Define an empty tree. 
+	\item Select an arbitrary vertex to add to the tree.
+	\item Add the least weight edge that connects to the tree.
+	\item Repeat until all vertices are connected.
+\end{enumerate}
+
+\subsection*{Complexity}
+$$
+\text{Using adjacency matrix: } O(\vert V \vert^2 )
+$$
+$$
+\text{Using binary heap and adjacency list: } O((\vert V \vert + \vert E \vert) \log(\vert V \vert)) = O(\vert E \vert \log(\vert V \vert))
+$$
+$$
+\text{Using Fibonacci heap and adjacency list: } O(\vert E \vert + \vert V \vert \log(\vert V \vert))
+$$
+
+\subsection{Example}
+\textbf{Find the minimum spanning tree of the following graph using Prim's algorithm.}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge node [] {3} (b)
+	(e)	edge node [] {4} (b)
+	(e)	edge node [] {6} (c)
+	(e) edge node [] {7} (d)
+	(b) edge node [] {5} (c)
+	(c) edge node [] {2} (d);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Initial Tree Starting from Vertex a}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [dotted] node [] {1} (e)
+	(a) edge [dotted] node [] {3} (b);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Add edge (a,e)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge [dotted] node [] {3} (b)
+	(e)	edge [dotted] node [] {4} (b)
+	(e)	edge [dotted] node [] {6} (c)
+	(e) edge [dotted] node [] {7} (d);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Add edge (a,b)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge [] node [] {3} (b)
+	(e)	edge [dotted] node [] {4} (b)
+	(e)	edge [dotted] node [] {6} (c)
+	(e) edge [dotted] node [] {7} (d)
+	(b) edge [dotted] node [] {5} (c);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Add edge (a,b)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge [] node [] {3} (b)
+	(e)	edge [dotted] node [] {4} (b)
+	(e)	edge [dotted] node [] {6} (c)
+	(b) edge [dotted] node [] {5} (c)
+	(e) edge [dotted] node [] {7} (d);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Add edge (b,e)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge [] node [] {3} (b)
+	(e)	edge [dotted] node [] {4} (b)
+	(e)	edge [dotted] node [] {6} (c)
+	(b) edge [dotted] node [] {5} (c)
+	(e) edge [dotted] node [] {7} (d);
+	\end{tikzpicture}
+	\caption*{Cannot edge (b,e) since vertex b and vertex e are in the same tree.}
+\end{figure}
+
+\subsubsection*{Add edge (b,c)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge [] node [] {3} (b)
+	(e)	edge [dotted] node [] {4} (b)
+	(e)	edge [dotted] node [] {6} (c)
+	(b) edge [] node [] {5} (c)
+	(e) edge [dotted] node [] {7} (d)
+	(c) edge [dotted] node [] {2} (d);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Add edge (c,d)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (e) [right of=a] {e};
+	\node[main node] (b) [below of=a] {b};
+	\node[main node] (c) [below of=e] {c};
+	\node[main node] (d) [right of=c] {d};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {1} (e)
+	(a)	edge [] node [] {3} (b)
+	(b) edge [] node [] {5} (c)
+	(c) edge [] node [] {2} (d);
+	\end{tikzpicture}
+	\caption*{All vertices in same tree. Therefore, minimum spanning tree has been derived.}
+\end{figure}
