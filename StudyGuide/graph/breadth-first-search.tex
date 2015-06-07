@@ -1,1 +1,351 @@
-\section{Case Study: Breadth First Search (BFS)}
+\section{Breadth-First Search (BFS)}
+
+\subsection*{Problem Statement}
+Given a graph $G$ and a vertex $v \in Graph$, find all vertices reachable from $v$ as they are discovered.
+
+\subsection*{Pseudocode}
+\begin{algorithm}
+	\begin{algorithmic}[1]
+		\Procedure{Breadth-First-Search}{G,v}
+		\State Let Q be defined as a queue
+		\State Q.enqueue(v)\\
+		\State v.discovered = true\\
+		\While{Q is not empty}
+			\State u = Q.dequeue()
+			\State (Arbitrary Processing of Node u)
+			\For{Edge $e \in E$ where $ e = (u,w)$}
+				\If{w.discovered $!=$ true}
+					\State Q.enqueue(w);
+					\State w.discovered = true
+				\EndIf
+			\EndFor
+		\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item Assume there exists some queue Q.
+	\item Starting from a given vertex $v$, mark $v$ as discovered and enqueue $v$ into the Q.
+	\item For every iteration:
+	\begin{enumerate}
+		\item Dequeue the next vertex in Q and define this dequeued vertex as $u$.
+		\item For every vertex $w$ that is connected to vertex $u$ by some edge, enqueue each of them in lexical order (alphabetical order) and mark them as discovered.
+		\item Repeat until Q is empty.
+	\end{enumerate}
+\end{enumerate}
+
+\subsection*{Complexity}
+$$
+O(\vert V \vert + \vert E \vert)
+$$
+
+\newpage
+
+\subsection{Example}
+\textbf{Given the following graph $G$, perform a breadth-first search from vertex $a$ and print the order that vertices are discovered.}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+		
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {} (f)
+	(c)	edge node [] {} (d)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(d) edge node [] {} (h)
+	(f) edge node [] {} (g)
+	(g) edge node [] {} (h);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Initialization}
+$$
+Q = \{ a \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [dotted] node [] {} (b)
+	(a)	edge [dotted] node [] {} (e);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Dequeue a and Enqueue b,e}
+$$
+Q = \{ b,e \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [dotted] node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+$$
+\text{Order of Discovery: } a
+$$
+
+\subsubsection*{Dequeue b and Enqueue f}
+$$
+Q = \{ e, f \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [] node [] {} (f)
+	(c)	edge [dotted] node [] {} (f)
+	(f) edge [dotted] node [] {} (g);
+	\end{tikzpicture}
+\end{figure}
+$$
+\text{Order of Discovery: } a, b
+$$
+
+\subsubsection*{Dequeue e and Enqueue Nothing}
+$$
+Q = \{ f \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [] node [] {} (f)
+	(c)	edge [dotted] node [] {} (f)
+	(f) edge [dotted] node [] {} (g);
+	\end{tikzpicture}
+\end{figure}
+$$
+\text{Order of Discovery: } a, b, e
+$$
+
+\subsubsection*{Dequeue f and Enqueue c,g}
+$$
+Q = \{ c,g  \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [] node [] {} (f)
+	(c)	edge [dotted] node [] {} (d)
+	(c)	edge [] node [] {} (f)
+	(c) edge [dotted] node[] {} (g)
+	(f) edge node [] {} (g)
+	(g) edge [dotted] node [] {} (h);
+	\end{tikzpicture}
+\end{figure}
+$$
+\text{Order of Discovery: } a, b, e, f
+$$
+
+\subsubsection*{Dequeue c and Enqueue d}
+$$
+Q = \{ g, d  \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [] node [] {} (f)
+	(c)	edge [dotted] node [] {} (d)
+	(c)	edge [] node [] {} (f)
+	(d) edge [dotted] node [] {} (h)
+	(f) edge node [] {} (g)
+	(g) edge [dotted] node [] {} (h);
+	\end{tikzpicture}
+	\caption*{Note that when c is processed, it notices that g is already discovered so it does not attempt that edge. Hence why the dotted edge (c,g) disappears.}
+\end{figure}
+$$
+\text{Order of Discovery: } a, b, e, f, c
+$$
+
+\newpage
+
+\subsubsection*{Dequeue g and Enqueue h}
+$$
+Q = \{ d, h  \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [] node [] {} (f)
+	(c)	edge [dotted] node [] {} (d)
+	(c)	edge [] node [] {} (f)
+	(d) edge [dotted] node [] {} (h)
+	(f) edge node [] {} (g)
+	(g) edge [dotted] node [] {} (h);
+	\end{tikzpicture}
+\end{figure}
+$$
+\text{Order of Discovery: } a, b, e, f, c, g
+$$
+
+\subsubsection*{Dequeue d and Enqueue Nothing}
+$$
+Q = \{ d, h  \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [] node [] {} (f)
+	(c)	edge [] node [] {} (d)
+	(c)	edge [] node [] {} (f)
+	(f) edge node [] {} (g)
+	(g) edge [dotted] node [] {} (h);
+	\end{tikzpicture}
+\end{figure}
+$$
+\text{Order of Discovery: } a, b, e, f, c, g, d
+$$
+
+\subsubsection*{Dequeue h and Enqueue Nothing}
+$$
+Q = \{ h  \}
+$$
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (d) [right of=c] {d};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	\node[main node] (h) [below of=d] {h};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge [] node [] {} (b)
+	(a)	edge [] node [] {} (e)
+	(b)	edge [] node [] {} (f)
+	(c)	edge [] node [] {} (d)
+	(c)	edge [] node [] {} (f)
+	(f) edge node [] {} (g)
+	(g) edge [] node [] {} (h);
+	\end{tikzpicture}
+\end{figure}
+$$
+\text{Order of Discovery: } a, b, e, f, c, g, d, h
+$$

@@ -49,9 +49,10 @@
 \contentsline {subsection}{\numberline {6.3.1}Example}{49}
 \contentsline {section}{\numberline {6.4}Minimum Spanning Tree: Prim's Algorithm}{51}
 \contentsline {subsection}{\numberline {6.4.1}Example}{51}
-\contentsline {section}{\numberline {6.5}Case Study: Breadth First Search (BFS)}{53}
-\contentsline {section}{\numberline {6.6}Case Study: Depth-First Search (DFS)}{54}
-\contentsline {chapter}{\numberline {7}Side Topics}{55}
-\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{56}
-\contentsline {subsection}{\numberline {7.1.1}Example}{56}
-\contentsline {subsection}{\numberline {7.1.2}Example}{57}
+\contentsline {section}{\numberline {6.5}Breadth-First Search (BFS)}{53}
+\contentsline {subsection}{\numberline {6.5.1}Example}{54}
+\contentsline {section}{\numberline {6.6}Case Study: Depth-First Search (DFS)}{57}
+\contentsline {chapter}{\numberline {7}Side Topics}{59}
+\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{60}
+\contentsline {subsection}{\numberline {7.1.1}Example}{60}
+\contentsline {subsection}{\numberline {7.1.2}Example}{61}
