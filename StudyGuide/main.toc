@@ -36,12 +36,12 @@
 \contentsline {subsection}{\numberline {5.2.1}Example}{33}
 \contentsline {section}{\numberline {5.3}Case Study: Matrix Chain Multiplication}{36}
 \contentsline {subsection}{\numberline {5.3.1}Example}{37}
-\contentsline {section}{\numberline {5.4}Case Study: Longest Common Subsequence}{38}
-\contentsline {section}{\numberline {5.5}Case Study: Knapsack}{39}
-\contentsline {chapter}{\numberline {6}Graph Theory}{41}
-\contentsline {section}{\numberline {6.1}Case Study: Breadth First Search (BFS)}{42}
-\contentsline {section}{\numberline {6.2}Case Study: Depth-First Search (DFS)}{43}
-\contentsline {chapter}{\numberline {7}Side Topics}{45}
-\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{46}
-\contentsline {subsection}{\numberline {7.1.1}Example}{46}
-\contentsline {subsection}{\numberline {7.1.2}Example}{47}
+\contentsline {section}{\numberline {5.4}Case Study: Longest Common Subsequence}{40}
+\contentsline {section}{\numberline {5.5}Case Study: Knapsack}{41}
+\contentsline {chapter}{\numberline {6}Graph Theory}{43}
+\contentsline {section}{\numberline {6.1}Case Study: Breadth First Search (BFS)}{44}
+\contentsline {section}{\numberline {6.2}Case Study: Depth-First Search (DFS)}{45}
+\contentsline {chapter}{\numberline {7}Side Topics}{47}
+\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{48}
+\contentsline {subsection}{\numberline {7.1.1}Example}{48}
+\contentsline {subsection}{\numberline {7.1.2}Example}{49}
