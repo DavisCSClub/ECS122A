@@ -1,1 +1,437 @@
 \section{Case Study: Depth-First Search (DFS)}
+
+\subsection{Definitions}
+\begin{itemize}
+	\item \textbf{Tree Edge: } Edge in the depth-first forest $G_\pi$ where $v$ was first discovered by exploring edge $(u,v)$.
+	\item \textbf{Back Edge: } Edge $(u,v)$ connecting vertex $u$ to an ancestor $v$.
+	\item \textbf{Forward Edge: } Nontree edge $(u,v)$ connecting vertex $u$ to a descendant $v$.
+	\item \textbf{Cross Edge: } Any other edge that does not fall in the category of the previous three.
+\end{itemize}
+
+\subsection*{Steps}
+\begin{enumerate}
+	\item All vertices are defined to have a discovery time, finish time, and a color that defines its state.
+	\item Define a timer $t$ that tracks the number of operations we've performed (visit an edge or finish processing an edge). 
+	\item Given a starting vertex $v$, visit that vertex.
+	\item Visiting a given vertex $u$:
+	\begin{enumerate}
+		\item Increase the timer by 1 and the start time of vertex $u$ is the value of the timer.
+		\item The color of vertex $u$ is then set to GRAY for visited, but not finished.
+		\item For every vertex that $u$ is connected to and has the color WHITE, visit those vertices in lexical order.
+		\item Once all vertices that $u$ is connected to have been visited and finished, the color of $u$ is set to BLACK for finished.
+		\item The timer is increased by 1 again and the finish time of vertex $u$ is the value of the timer.
+	\end{enumerate}
+	\item Repeat the visiting vertices until all vertices are finished.
+\end{enumerate}
+
+\subsection*{Complexity}
+$$
+\Theta(\vert V \vert + \vert E \vert)
+$$
+
+\newpage
+
+\subsection{Example}
+\textbf{Given the following graph $G$, perform a depth-first search from vertex $a$ and print the order that vertices are discovered and label the edges according to their classification.}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	
+	\node[main node] (a) {a};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {} (b)
+	(f) edge node [] {} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Visit Vertex a (Given)}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	
+	\node[main node, fill=gray] (a) {$a_{1/}$};
+	\node[main node] (b) [right of=a] {b};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {} (b)
+	(f) edge node [] {} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Visit Vertex b from Vertex a}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	
+	\node[main node, fill=gray] (a) {$a_{1/}$};
+	\node[main node, fill=gray] (b) [right of=a] {$b_{2/}$};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node] (f) [below of=b] {f};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {} (b)
+	(f) edge node [] {} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Visit Vertex f from Vertex b}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	
+	\node[main node, fill=gray] (a) {$a_{1/}$};
+	\node[main node, fill=gray] (b) [right of=a] {$b_{2/}$};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node] (e) [below of=a] {e};
+	\node[main node, fill=gray] (f) [below of=b] {$f_{3/}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {} (b)
+	(f) edge node [] {} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Visit Vertex e from Vertex f}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	
+	\node[main node, fill=gray] (a) {$a_{1/}$};
+	\node[main node, fill=gray] (b) [right of=a] {$b_{2/}$};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node,fill=gray] (e) [below of=a] {$e_{4/}$};
+	\node[main node, fill=gray] (f) [below of=b] {$f_{3/}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Attempt to Visit Vertex b from Vertex e and Finishing Vertex e}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=gray] (a) {$a_{1/}$};
+	\node[main node, fill=gray] (b) [right of=a] {$b_{2/}$};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=gray] (f) [below of=b] {$f_{3/}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+	\caption*{Unable to visit vertex b from vertex e since b does not have the color WHITE. Since attempting to visit from GRAY-colored vertex to another GRAY-colored vertex, this implies that vertex b must be an ancestor of vertex e. Therefore, this edge is a back edge.}
+\end{figure}
+
+\subsubsection*{Finishing Vertex f}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=gray] (a) {$a_{1/}$};
+	\node[main node, fill=gray] (b) [right of=a] {$b_{2/}$};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black, text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Finishing Vertex b}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=gray] (a) {$a_{1/}$};
+	\node[main node, fill=black,text=white] (b) [right of=a] {$b_{2/7}$};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black, text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [] {} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Attempt to Visit Vertex e from Vertex a and Finishing Vertex a}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=black,text=white] (a) {$a_{1/8}$};
+	\node[main node, fill=black, text=white] (b) [right of=a] {$b_{2/7}$};
+	\node[main node] (c) [right of=b] {c};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black,text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [left] {Forward} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+	\caption*{Unable to visit vertex e from vertex a since vertex e does not have color WHITE. Since attempting to visit a BLACK-colored vertex from a GRAY-colored vertex, it implies that this may be a forward edge or a cross edge. Since we know that vertex e is a descendant of vertex a, this edge must be a forward edge.}
+\end{figure}
+
+\subsubsection*{Visit Vertex c}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=black,text=white] (a) {$a_{1/8}$};
+	\node[main node, fill=black, text=white] (b) [right of=a] {$b_{2/7}$};
+	\node[main node, fill=gray] (c) [right of=b] {$c_{9/}$};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black,text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [left] {Forward} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+	\caption*{Note: Not all vertices have been processed, therefore we choose an unvisited vertex in lexical order.}
+\end{figure}
+
+\subsubsection*{Attempt to Visit Vertex f from Vertex c}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=black,text=white] (a) {$a_{1/8}$};
+	\node[main node, fill=black, text=white] (b) [right of=a] {$b_{2/7}$};
+	\node[main node, fill=gray] (c) [right of=b] {$c_{9/}$};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black,text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node] (g) [below of=c] {g};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [left] {Forward} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {Cross} (f)
+	(c)	edge node [] {} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+	\caption*{Unable to visit vertex f from vertex c since vertex e does not have color WHITE. Since attempting to visit a BLACK-colored vertex from a GRAY-colored vertex, it implies that this may be a forward edge or a cross edge. Since we know that vertex f is not a descendant of vertex c, this edge must be a cross edge.}
+\end{figure}
+
+\subsubsection*{Visit Vertex g from Vertex c}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=black,text=white] (a) {$a_{1/8}$};
+	\node[main node, fill=black, text=white] (b) [right of=a] {$b_{2/7}$};
+	\node[main node, fill=gray] (c) [right of=b] {$c_{9/}$};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black,text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node, fill=gray] (g) [below of=c] {$g_{10/}$};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [left] {Forward} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {Cross} (f)
+	(c)	edge node [] {Tree} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Attempt to Visit Vertex f from Vertex a and Finishing Vertex g}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=black,text=white] (a) {$a_{1/8}$};
+	\node[main node, fill=black, text=white] (b) [right of=a] {$b_{2/7}$};
+	\node[main node, fill=gray] (c) [right of=b] {$c_{9/}$};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black,text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node, fill=black, text=white] (g) [below of=c] {$g_{10/11}$};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [left] {Forward} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {Cross} (f)
+	(c)	edge node [] {Tree} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {Cross} (f);
+	\end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Finishing Vertex c}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+	thick,main node/.style={circle,draw}]
+	
+	\definecolor{gray}{RGB}{200,200,200}
+	\definecolor{black}{RGB}{0,0,0}
+	
+	\node[main node, fill=black,text=white] (a) {$a_{1/8}$};
+	\node[main node, fill=black, text=white] (b) [right of=a] {$b_{2/7}$};
+	\node[main node, fill=black,text=white] (c) [right of=b] {$c_{9/12}$};
+	\node[main node,fill=black,text=white] (e) [below of=a] {$e_{4/5}$};
+	\node[main node, fill=black,text=white] (f) [below of=b] {$f_{3/6}$};
+	\node[main node, fill=black, text=white] (g) [below of=c] {$g_{10/11}$};
+	
+	\path[every node/.style={font=\sffamily\small}]
+	(a) edge node [] {Tree} (b)
+	(a)	edge node [left] {Forward} (e)
+	(b)	edge node [] {Tree} (f)
+	(c)	edge node [] {Cross} (f)
+	(c)	edge node [] {Tree} (g)
+	(e) edge node [] {Back} (b)
+	(f) edge node [] {Tree} (e)
+	(g)	edge node [] {Cross} (f);
+	\end{tikzpicture}
+\end{figure}

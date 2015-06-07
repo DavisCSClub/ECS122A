@@ -52,7 +52,9 @@
 \contentsline {section}{\numberline {6.5}Breadth-First Search (BFS)}{53}
 \contentsline {subsection}{\numberline {6.5.1}Example}{54}
 \contentsline {section}{\numberline {6.6}Case Study: Depth-First Search (DFS)}{57}
-\contentsline {chapter}{\numberline {7}Side Topics}{59}
-\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{60}
-\contentsline {subsection}{\numberline {7.1.1}Example}{60}
-\contentsline {subsection}{\numberline {7.1.2}Example}{61}
+\contentsline {subsection}{\numberline {6.6.1}Definitions}{57}
+\contentsline {subsection}{\numberline {6.6.2}Example}{58}
+\contentsline {chapter}{\numberline {7}Side Topics}{63}
+\contentsline {section}{\numberline {7.1}Proof by Mathematical Induction}{64}
+\contentsline {subsection}{\numberline {7.1.1}Example}{64}
+\contentsline {subsection}{\numberline {7.1.2}Example}{65}
